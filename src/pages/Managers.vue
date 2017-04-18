@@ -21,7 +21,7 @@
   import { mapState } from 'vuex'
   export default {
     created () {
-      this.$store.dispatch('getAllManagers')
+      this.$store.dispatch('getManagers')
     },
     components: {
       Hero,

@@ -7,8 +7,9 @@ export default {
       .catch(console.error)
   },
   getPlayers ({ commit, state }) {
+    console.log('aey')
     let url = 'players?'
-    state.filterList.forEach(({ name, data }, i) => {
+    state.filters.forEach(({ name, data }, i) => {
       if (data !== '' && data !== 'none') {
         url += `${name}=${data.replace(' ', '-')}&`
       }

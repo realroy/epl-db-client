@@ -16,6 +16,8 @@ import Navbar from './components/Navbar'
 export default {
   created () {
     this.$store.dispatch('getAllClubs')
+    this.$store.dispatch('getManagers')
+    this.$store.dispatch('getPlayers')
   },
   name: 'app',
   components: {

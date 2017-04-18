@@ -2,7 +2,7 @@
   <div class="card" @click="viewMore(info.name)">
     <div class="card-image">
       <figure class="image">
-          <img src="../assets/Player-Photo-Missing.png">
+          <img :src="'/static/managers/' + info.name +'.png'">
       </figure>
     </div>
     <div class="card-content">
