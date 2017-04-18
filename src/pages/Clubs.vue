@@ -24,12 +24,12 @@
       this.$store.dispatch('getAllClubs')
     },
     components: {
-      'hero': Hero,
-      'club-card': ClubCard
+      Hero,
+      ClubCard
     },
     computed: {
       ...mapState({
-        clubs: state => state.clubs
+        clubs: state => state.clubs.clubs
       })
     }
   }

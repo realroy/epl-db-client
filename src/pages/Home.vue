@@ -16,12 +16,12 @@
       this.$store.dispatch('getRanking')
     },
     components: {
-      'custom-table': CustomTable,
-      'hero': Hero
+      CustomTable,
+      Hero
     },
     computed: {
       ...mapState({
-        rankings: state => state.rankings
+        rankings: state => state.clubs.clubs
       })
     },
     data () {
