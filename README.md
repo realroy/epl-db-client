@@ -1,5 +1,3 @@
-# epl-db2016-client
-
 # English Premier League 2016 Database
 
 Dynamic web application project for database course.
