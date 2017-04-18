@@ -5,8 +5,11 @@ export default {
   GET_PLAYERS (store, nextState) {
     store.players = nextState
   },
-  UPDATE_FILTERS (store, nextState) {
-    store.filters = [...store.filter, nextState]
+  ADD_FILTER (store, nextState) {
+    store.filters = [...store.filters, nextState]
+  },
+  UPDATE_FILTER (store, { index, value }) {
+    store.filters[index] = value
   },
   CLEAR_FILTERS (store) {
     store.filters = []

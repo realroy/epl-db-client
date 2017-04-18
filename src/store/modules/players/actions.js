@@ -7,11 +7,10 @@ export default {
       .catch(console.error)
   },
   getPlayers ({ commit, state }) {
-    console.log('aey')
     let url = 'players?'
-    state.filters.forEach(({ name, data }, i) => {
-      if (data !== '' && data !== 'none') {
-        url += `${name}=${data.replace(' ', '-')}&`
+    state.filters.forEach(({ name, value }, i) => {
+      if (value !== '' && value !== 'none') {
+        url += `${name}=${value}&`
       }
     })
     url += `_page=${state.page}`
@@ -19,8 +18,9 @@ export default {
       .then(res => commit('GET_PLAYERS', res))
       .catch(console.error)
   },
-  updateFilters ({ commit, dispatch }, { name, value }) {
-    commit('UPDATE_FILTERS', { name, value })
+  updateFilters ({ commit, dispatch, state }, { name, value }) {
+    const index = state.filters.findIndex(f => f.name === name)
+    index !== -1 ? commit('UPDATE_FILTER', { index, value }) : commit('ADD_FILTER', { name, value })
     dispatch('getPlayers')
   },
   clearFilters ({ commit, dispatch }) {

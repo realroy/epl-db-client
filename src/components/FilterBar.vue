@@ -8,7 +8,7 @@
         @input="updateText"
       >
     </p>
-    <p class="control" v-for="(f, i) in filterData">
+    <p class="control" v-for="f in filters">
       <span class="select">
         <select :name="f.name" @change="updateSelect">
           <option value="none">{{ f.name.charAt(0).toUpperCase() + f.name.replace('-', ' ').substr(1) }}</option>
@@ -17,43 +17,42 @@
       </span>
     </p>
     <p class="control">
-      <button @click="resetFilter" class="button is-danger">Reset Filter</button>
+      <button @click="onReset" class="button is-danger">Reset Filter</button>
     </p>
 </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
-  computed: {
-    ...mapState({
-      filterPlayerList: state => state.filterPlayerList,
-      filterList: state => state.filterList
-    })
-  },
   props: {
     name: {
       required: true,
       type: String
     },
-    filterData: {
+    filters: {
       required: true,
       type: Array
+    },
+    onUpdate: {
+      required: true,
+      type: Function
+    },
+    onReset: {
+      required: true,
+      type: Function
     }
   },
   methods: {
     updateText (e) {
-      this.$store.dispatch('updateTextFilter', e.target.value)
+      this.onUpdate({
+        name: 'textField',
+        value: e.target.value.trim()
+      })
     },
     updateSelect (e) {
-      const result = { name: e.target.name, value: e.target.value }
-      this.$store.dispatch('updateFilter', result)
-      this.$store.dispatch('getFilteredPlayers')
-      this.$store.dispatch('resetPagePlayer')
-    },
-    resetFilter (e) {
-      this.$store.dispatch('clearFilteredPlayers')
-      this.$store.dispatch('getFilteredPlayers')
+      this.onUpdate({
+        name: e.target.name, value: e.target.value
+      })
     }
   }
 }

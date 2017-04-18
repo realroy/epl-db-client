@@ -3,10 +3,15 @@
     <hero></hero>
     <br>
     <div class="container">
-      <filter-bar :name="'player' || '' " :filterData="filterData || []"></filter-bar>
+      <filter-bar
+        :name="'player'"
+        :filters="filters"
+        :onUpdate="onUpdate"
+        :onReset="onReset"
+      ></filter-bar>
       <nav class="pagination is-centered">
-        <a class="pagination-previous" @click="prevPage">< Previous</a>
-        <a class="pagination-next" @click="nextPage">Next page ></a>
+        <a class="pagination-previous" @click="updatePage('PREV')">< Previous</a>
+        <a class="pagination-next" @click="updatePage">Next page ></a>
       </nav>
       <br>
       <div class="columns is-multiline is-mobile">
@@ -22,13 +27,13 @@
 
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import FilterBar from '../components/FilterBar'
 import Hero from '../components/Hero'
 import PlayerCard from '../components/PlayerCard'
 export default {
   created () {
-    this.$store.dispatch('getMorePlayers', this.pageCount)
+    this.getPlayers()
   },
   components: {
     FilterBar,
@@ -37,11 +42,11 @@ export default {
   },
   computed: {
     ...mapState({
-      players: state => state.filteredPlayers,
-      clubs: state => state.clubs,
-      pageCount: state => state.playerPage
+      players: state => state.players.players,
+      clubs: state => state.clubs.clubs,
+      pageCount: state => state.player.page
     }),
-    filterData () {
+    filters () {
       return [
         {
           name: 'position',
@@ -58,20 +63,15 @@ export default {
       ]
     }
   },
-  data () {
-    return {
-      pageCount: 1
-    }
-  },
   methods: {
-    nextPage () {
-      this.pageCount++
-      this.$store.dispatch('getFilteredPlayers', this.pageCount)
+    ...mapActions(['updatePage', 'getPlayers', 'updateFilters', 'clearFilters']),
+    onUpdate ({name, value}) {
+      this.updateFilters({ name, value })
     },
-    prevPage () {
-      (this.pageCount - 1 > 0) ? this.pageCount-- : this.pageCount
-      this.$store.dispatch('getFilteredPlayers', this.pageCount)
+    onReset () {
+      this.clearFilter()
     }
+
   }
 }
 </script>
