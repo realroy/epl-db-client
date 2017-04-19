@@ -29,7 +29,7 @@ import Hero from '../components/Hero'
 import PlayerTable from '../components/PlayerTable'
 export default {
   created () {
-    this.getPlayers()
+    this.clearFilters()
   },
   components: {
     FilterBar,

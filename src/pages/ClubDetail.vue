@@ -37,9 +37,10 @@ import DetailHero from '../components/DetailHero'
 export default {
   created () {
     const clubName = this.$router.currentRoute.params.name
+    this.clearFilter()
     this.getClubByName(clubName)
     this.updateFilters({name: 'club_name', value: clubName})
-    this.getPlayers()
+    this.getPlayers(true)
   },
   components: {
     ClubFixture,
@@ -54,7 +55,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers'])
+    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers', 'clearFilter'])
   }
 }
 </script>
