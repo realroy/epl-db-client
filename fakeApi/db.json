@@ -1,6 +1,6 @@
 {
   "clubs": [{
-      "name": "AFC Bournemouth",
+      "name": "AFC-Bournemouth",
       "stadium_name": "Vitality Stadium",
       "official_site": "http://www.afcb.co.uk",
       "manager_id": 1
@@ -24,7 +24,7 @@
       "manager_id": 4
     },
     {
-      "name": "Crystal Palace",
+      "name": "Crystal-Palace",
       "stadium_name": "Selhurst Park",
       "official_site": "http://www.cpfc.co.uk/",
       "manager_id": 5
@@ -36,7 +36,7 @@
       "manager_id": 6
     },
     {
-      "name": "Hull City",
+      "name": "Hull-City",
       "stadium_name": "KCOM Stadium",
       "official_site": "http://www.hullcitytigers.com",
       "manager_id": 7
@@ -54,13 +54,13 @@
       "manager_id": 17
     },
     {
-      "name": "Manchester City",
+      "name": "Manchester-City",
       "stadium_name": "Eithad Stadium",
       "official_site": "http://www.mancity.com",
       "manager_id": 18
     },
     {
-      "name": "Manchester United",
+      "name": "Manchester-United",
       "stadium_name": "Old Trafford",
       "official_site": "http://www.manutd.com",
       "manager_id": 19
@@ -78,7 +78,7 @@
       "manager_id": 9
     },
     {
-      "name": "Stoke City",
+      "name": "Stoke-City",
       "stadium_name": "bet365 Stadium",
       "official_site": "http://www.stokecityfc.com",
       "manager_id": 10
@@ -90,13 +90,13 @@
       "manager_id": 11
     },
     {
-      "name": "Swansea City",
+      "name": "Swansea-City",
       "stadium_name": "Liberty Stadium",
       "official_site": "http://www.swanseacity.net",
       "manager_id": 12
     },
     {
-      "name": "Tottenham Hotspur",
+      "name": "Tottenham-Hotspur",
       "stadium_name": "White Hart Lane",
       "official_site": "http://www.tottenhamhotspur.com",
       "manager_id": 13
@@ -108,13 +108,13 @@
       "manager_id": 14
     },
     {
-      "name": "West Bromwich Albion",
+      "name": "West-Bromwich-Albion",
       "stadium_name": "The Hawthorns",
       "official_site": "http://www.wba.co.uk",
       "manager_id": 15
     },
     {
-      "name": "West Ham United",
+      "name": "West-Ham-United",
       "stadium_name": "London Stadium",
       "official_site": "http://www.whufc.com",
       "manager_id": 16

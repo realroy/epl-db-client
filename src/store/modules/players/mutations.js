@@ -9,7 +9,7 @@ export default {
     store.filters = [...store.filters, nextState]
   },
   UPDATE_FILTER (store, { index, value }) {
-    store.filters[index] = value
+    store.filters[index].value = value
   },
   CLEAR_FILTERS (store) {
     store.filters = []

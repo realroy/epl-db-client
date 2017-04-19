@@ -1,13 +1,8 @@
 import { fetch } from '../../lib'
 
 const createFilteredUrl = (url, {name, value}) => {
-  if (value !== 'none') {
-    if (value.split(' ').length > 1) {
-      value = value.replace(' ', '-')
-    }
-    return url + `${name}=${value}&`
-  }
-  return url
+  if (value !== 'none') return url + `${name}=${value}&`
+  else return url
 }
 
 export default {
@@ -18,7 +13,7 @@ export default {
   },
   getPlayers ({ commit, state }, all = false) {
     const url = state.filters.reduce(createFilteredUrl, 'players?')
-    const result = (all) ? `${url}_page=${state.page}` : url
+    const result = (all) ? url : `${url}_page=${state.page}`
     fetch(result)
       .then(res => commit('GET_PLAYERS', res))
       .catch(console.error)
