@@ -22,7 +22,7 @@
           <div class="container">
             <ul>
               <li v-for="(f, i) in footerList">
-                <a @click="onClickTab(i)">{{ f.name }}</a>
+                <router-link :to="f.path">{{ f.name }}</router-link>
               </li>
             </ul>
           </div>
@@ -33,11 +33,6 @@
 
 <script>
   export default {
-    methods: {
-      onClickTab (i) {
-        this.$store.dispatch('updateClubDetailTab', i)
-      }
-    },
     props: {
       picUrl: {
         type: String,

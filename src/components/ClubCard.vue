@@ -2,7 +2,7 @@
   <div class="card" @click="viewMore(info.name)">
     <div class="card-image">
       <figure class="image is-1by1">
-        <img :src="'/static/club-badge/' + info.name + '.svg'" alt="Image">
+        <img :src="'/static/club-badge/' + info.name + '.svg'" alt="ClubBadge">
       </figure>
     </div>
     <div class="card-content">

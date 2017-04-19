@@ -4,7 +4,8 @@
       :number="player.number"
       :name="player.name"
       :clubName="player.club_name"
-      :position="player.position"></player-hero>
+      :position="player.position">
+    </player-hero>
     <br>
     <div class="columns is-mobile is-multiline">
       <div class="column"></div>
@@ -42,7 +43,7 @@
                 ]"
               ></sidebox>
             </div>
-            <div class="column" v-if="player.position=='GoalKeeper'">
+            <div class="column" v-show="player.position=='GoalKeeper'">
               <sidebox
                 :name="'GoalKeeping'"
                 :info="[
@@ -79,13 +80,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Sidebox from '../components/SideBox'
 import CustomLevel from '../components/CustomLevel'
 import PlayerHero from '../components/PlayerHero'
 export default {
   created () {
-    this.$store.dispatch('getPlayer', this.$router.currentRoute.params.id)
+    this.getPlayerById(this.$router.currentRoute.params.id)
   },
   components: {
     CustomLevel,
@@ -94,8 +95,11 @@ export default {
   },
   computed: {
     ...mapState({
-      player: state => state.player
+      player: state => state.players.player
     })
+  },
+  methods: {
+    ...mapActions(['getPlayerById'])
   }
 }
 </script>

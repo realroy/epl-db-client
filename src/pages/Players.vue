@@ -8,18 +8,14 @@
         :filters="filters"
         :onUpdate="onUpdate"
         :onReset="onReset"
+        :results="filters"
       ></filter-bar>
       <nav class="pagination is-centered">
         <a class="pagination-previous" @click="updatePage('PREV')">< Previous</a>
-        <a class="pagination-next" @click="updatePage">Next page ></a>
+        <a class="pagination-next" @click="updatePage('NEXT')">Next page ></a>
       </nav>
       <br>
-      <div class="columns is-multiline is-mobile">
-        <div class="column is-3" v-for="player in  players">
-          <player-card :info="player"></player-card>
-        </div>
-      </div>
-
+      <player-table :players="players"></player-table>
       <br>
     </div>
   </div>
@@ -30,7 +26,7 @@
 import { mapState, mapActions } from 'vuex'
 import FilterBar from '../components/FilterBar'
 import Hero from '../components/Hero'
-import PlayerCard from '../components/PlayerCard'
+import PlayerTable from '../components/PlayerTable'
 export default {
   created () {
     this.getPlayers()
@@ -38,13 +34,13 @@ export default {
   components: {
     FilterBar,
     Hero,
-    PlayerCard
+    PlayerTable
   },
   computed: {
     ...mapState({
       players: state => state.players.players,
       clubs: state => state.clubs.clubs,
-      pageCount: state => state.player.page
+      filters: state => state.platers.filters
     }),
     filters () {
       return [
@@ -69,7 +65,7 @@ export default {
       this.updateFilters({ name, value })
     },
     onReset () {
-      this.clearFilter()
+      this.clearFilters()
     }
 
   }

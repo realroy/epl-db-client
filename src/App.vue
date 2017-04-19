@@ -1,27 +1,29 @@
 <template>
   <div id="app">
-    <transition name="fade">
-      <navbar></navbar>
-    </transition>
+    <navbar></navbar>
+    <br>
      <transition name="fade">
       <router-view></router-view>
     </transition>
   </div>
 </template>
 
-
-
 <script>
+import { mapActions } from 'vuex'
 import Navbar from './components/Navbar'
+
 export default {
   created () {
-    this.$store.dispatch('getAllClubs')
-    this.$store.dispatch('getManagers')
-    this.$store.dispatch('getPlayers')
+    this.getAllClubs()
+    this.getManagers()
+    this.getPlayers()
   },
   name: 'app',
   components: {
-    'navbar': Navbar
+    Navbar
+  },
+  methods: {
+    ...mapActions(['getAllClubs', 'getManagers', 'getPlayers'])
   }
 }
 </script>

@@ -10,10 +10,5 @@ export default {
     fetch(`clubs?name=${name}`)
       .then(res => commit('GET_CLUB_BY_NAME', res))
       .catch(console.err)
-  },
-  updateDetailTab ({ commit }, index = 0) {
-    if (index < 0) {
-      commit('UPDATE_DETAIL_TAB', index)
-    }
   }
 }

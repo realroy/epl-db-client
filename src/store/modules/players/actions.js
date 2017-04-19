@@ -1,20 +1,25 @@
 import { fetch } from '../../lib'
 
+const createFilteredUrl = (url, {name, value}) => {
+  if (value !== 'none') {
+    if (value.split(' ').length > 1) {
+      value = value.replace(' ', '-')
+    }
+    return url + `${name}=${value}&`
+  }
+  return url
+}
+
 export default {
   getPlayerById ({ commit }, id) {
     fetch(`players/${id}`)
       .then(res => commit('GET_PLAYER_BY_ID', res))
       .catch(console.error)
   },
-  getPlayers ({ commit, state }) {
-    let url = 'players?'
-    state.filters.forEach(({ name, value }, i) => {
-      if (value !== '' && value !== 'none') {
-        url += `${name}=${value}&`
-      }
-    })
-    url += `_page=${state.page}`
-    fetch(url)
+  getPlayers ({ commit, state }, all = false) {
+    const url = state.filters.reduce(createFilteredUrl, 'players?')
+    const result = (all) ? `${url}_page=${state.page}` : url
+    fetch(result)
       .then(res => commit('GET_PLAYERS', res))
       .catch(console.error)
   },

@@ -2,6 +2,7 @@
   <div>
     <detail-hero
       :title="club.name"
+      :picUrl="'/static/club-badge/' + club.name + '.svg'"
       :subtitles="[
         {name: 'Stadium Name', value: club.stadium_name},
         {
@@ -12,22 +13,22 @@
         }
       ]"
       :footerList="[
-        {name: 'Overview'},
-        {name: 'Squad'},
-        {name: 'Fixtures'},
-        {name: 'Result'},
-        {name: 'Stats'}
+        {name: 'Overview', path: `/club/${club.name}/overview`},
+        {name: 'Squad', path: `/club/${club.name}/squad`},
+        {name: 'Fixtures', path: `/club/${club.name}/fixtures`},
+        {name: 'Results', path: `/club/${club.name}/results`},
+        {name: 'Stats', path: `/club/${club.name}/stats`}
       ]"
     ></detail-hero>
+    <br>
     <div class="container">
-      <club-fixture v-if="clubDetailTab == 2"></club-fixture>
-      <club-squad v-if="clubDetailTab == 1"></club-squad>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Sidebox from '../components/SideBox'
 import ClubFixture from '../components/ClubFixture'
 import ClubSquad from '../components/ClubSquad'
@@ -35,8 +36,10 @@ import CustomLevel from '../components/CustomLevel'
 import DetailHero from '../components/DetailHero'
 export default {
   created () {
-    this.$store.dispatch('updateFilter', {})
-    this.$store.dispatch('updateClubDetailTab')
+    const clubName = this.$router.currentRoute.params.name
+    this.getClubByName(clubName)
+    this.updateFilters({name: 'club_name', value: clubName})
+    this.getPlayers()
   },
   components: {
     ClubFixture,
@@ -47,9 +50,11 @@ export default {
   },
   computed: {
     ...mapState({
-      club: state => state.club,
-      clubDetailTab: state => state.clubDetailTab
+      club: state => state.clubs.club
     })
+  },
+  methods: {
+    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers'])
   }
 }
 </script>

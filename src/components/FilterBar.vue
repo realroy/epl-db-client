@@ -8,11 +8,15 @@
         @input="updateText"
       >
     </p>
-    <p class="control" v-for="f in filters">
+    <p class="control" v-for="(f, i) in filters">
       <span class="select">
-        <select :name="f.name" @change="updateSelect">
-          <option value="none">{{ f.name.charAt(0).toUpperCase() + f.name.replace('-', ' ').substr(1) }}</option>
-          <option :value="each" v-for="each in f.data">{{ each }}</option>
+        <select
+          v-model="selecteds[i]"
+          :name="f.name"
+          @change="updateSelect(f.name, i)"
+        >
+          <option value="none">{{ f.name }}</option>
+          <option v-for="each in f.data">{{ each }}</option>
         </select>
       </span>
     </p>
@@ -24,6 +28,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      selecteds: new Array(this.filters.length).fill('none')
+    }
+  },
   props: {
     name: {
       required: true,
@@ -40,6 +49,10 @@ export default {
     onReset: {
       required: true,
       type: Function
+    },
+    results: {
+      required: true,
+      type: Array
     }
   },
   methods: {
@@ -49,10 +62,8 @@ export default {
         value: e.target.value.trim()
       })
     },
-    updateSelect (e) {
-      this.onUpdate({
-        name: e.target.name, value: e.target.value
-      })
+    updateSelect (name, i) {
+      this.onUpdate({name, value: this.selecteds[i]})
     }
   }
 }

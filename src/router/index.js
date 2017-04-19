@@ -6,6 +6,7 @@ import ManagerPage from '@/pages/Managers'
 import PlayerPage from '@/pages/Players'
 import PlayerDetail from '@/pages/PlayerDetail'
 import ClubDetail from '@/pages/ClubDetail'
+import PlayerTable from '@/components/PlayerTable'
 
 Vue.use(Router)
 
@@ -40,7 +41,14 @@ export default new Router({
     {
       path: '/club/:name',
       name: 'ClubDetail',
-      component: ClubDetail
+      component: ClubDetail,
+      children: [
+        { path: 'overview', component: PlayerTable },
+        { path: 'squad', component: PlayerTable },
+        { path: 'fixtures', component: PlayerTable },
+        { path: 'results', component: PlayerTable },
+        { path: 'stats', component: PlayerTable }
+      ]
     }
 
   ]
