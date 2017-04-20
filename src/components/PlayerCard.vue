@@ -37,7 +37,7 @@
     },
     methods: {
       viewMore (name) {
-        this.$router.push(`player/${name}`)
+        this.$router.push(`/player/${name}`)
       }
     }
   }

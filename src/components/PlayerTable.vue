@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-multiline is-mobile">
-    <div :class="'column is-' + column" v-for="player in  players">
+    <div class="column is-3-desktop " v-for="player in  players">
       <player-card :info="player"></player-card>
     </div>
   </div>

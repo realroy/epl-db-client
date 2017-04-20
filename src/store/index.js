@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 const state = {
   rankings: [],
-  managers: []
+  managers: [],
+  validAuth: false
 }
 
 export default new Vuex.Store({

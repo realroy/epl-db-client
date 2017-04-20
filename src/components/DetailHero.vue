@@ -2,7 +2,7 @@
   <section class="hero is-primary">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <img :src="picUrl" width="128">
+          <img v-if="hasImage" :src="picUrl" width="128">
           <h1 class="title">
             {{ title }}
           </h1>
@@ -34,6 +34,10 @@
 <script>
   export default {
     props: {
+      hasImage: {
+        type: Boolean,
+        default: false
+      },
       picUrl: {
         type: String,
         default: '/static/Player-Photo-Missing.png'

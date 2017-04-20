@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="nav has-shadow">
     <div class="container">
       <div class="nav-left">
         <router-link to="/" class="nav-item">
@@ -7,7 +7,7 @@
         </router-link>
         <router-link
           v-for="(r, i) in routes"
-          class="nav-item is-tab"
+          class="nav-item is-tab is-hidden-mobile"
           active-class="is-active"
           :to="r.path"
           :key="i">
@@ -15,6 +15,11 @@
         </router-link>
       </div>
     </div>
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
   </nav>
 </template>
 

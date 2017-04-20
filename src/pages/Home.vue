@@ -1,7 +1,7 @@
 <template>
   <div>
     <hero></hero>
-    <div class="container">
+    <div class="container is-multiline is-mobile">
       <custom-table :head="head" :body="rankings"></custom-table>
     </div>
   </div>

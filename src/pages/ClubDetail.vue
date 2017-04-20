@@ -2,9 +2,12 @@
   <div>
     <detail-hero
       :title="club.name"
+      :hasImage="true"
       :picUrl="'/static/club-badge/' + club.name + '.svg'"
       :subtitles="[
-        {name: 'Stadium Name', value: club.stadium_name},
+        {
+          name: 'Stadium Name',
+          value: club.stadium_name},
         {
           name: 'Official Site',
           hasLink: true,
@@ -37,7 +40,7 @@ import DetailHero from '../components/DetailHero'
 export default {
   created () {
     const clubName = this.$router.currentRoute.params.name
-    this.clearFilter()
+    this.clearFilters()
     this.getClubByName(clubName)
     this.updateFilters({name: 'club_name', value: clubName})
     this.getPlayers(true)
@@ -55,7 +58,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers', 'clearFilter'])
+    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers', 'clearFilters'])
   }
 }
 </script>

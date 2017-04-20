@@ -1,5 +1,5 @@
 <template>
-  <div class="field has-addons">
+  <div class="field has-addons is-hidden-mobile">
     <p class="control is-expanded">
       <input
         class="input"

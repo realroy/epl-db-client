@@ -1,12 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePage from '@/pages/Home'
-import ClubPage from '@/pages/Clubs'
-import ManagerPage from '@/pages/Managers'
-import PlayerPage from '@/pages/Players'
-import PlayerDetail from '@/pages/PlayerDetail'
-import ClubDetail from '@/pages/ClubDetail'
-import PlayerTable from '@/components/PlayerTable'
+
+import {
+  ClubPage,
+  ClubDetail,
+  DashboardPage,
+  FixturePage,
+  HomePage,
+  LoginPage,
+  ManagerPage,
+  PlayerDetail,
+  PlayerPage,
+  ResultPage
+} from '@/pages'
+
+import { PlayerTable } from '@/components'
 
 Vue.use(Router)
 
@@ -34,6 +42,16 @@ export default new Router({
       component: PlayerPage
     },
     {
+      path: '/fixtures',
+      name: 'Fixtures',
+      component: FixturePage
+    },
+    {
+      path: '/results',
+      name: 'Results',
+      component: ResultPage
+    },
+    {
       path: '/player/:id',
       name: 'PlayerDetail',
       component: PlayerDetail
@@ -49,7 +67,14 @@ export default new Router({
         { path: 'results', component: PlayerTable },
         { path: 'stats', component: PlayerTable }
       ]
+    },
+    {
+      path: '/admin',
+      name: 'Login',
+      component: LoginPage,
+      children: [
+        { path: 'dashboard', component: DashboardPage }
+      ]
     }
-
   ]
 })
