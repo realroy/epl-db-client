@@ -6,25 +6,29 @@ export default {
       const res = await fetch(`fixtures/${id}`)
       commit('GET_FIXTURE_BY_ID', res.data)
     } catch (err) {
-      console.log(err)
+      console.log('Action: getFixtureById\n', err)
     }
   },
-  async getFixtures ({ commit, state }, all = false) {
+  async getFixtures ({ commit, state }, getAllFixture = false) {
     try {
-      const url = state.filters.reduce(createFilteredUrl, 'fixtures?')
-      const result = (all) ? url : `${url}_page=${state.page}`
-      const res = await fetch(result)
-      commit('GET_PLAYERS', res.data)
+      const startPrefix = 'fixtures?'
+      const filteredPrefix = Object.keys(state.filter)
+        .reduce(createFilteredUrl, startPrefix)
+        .slice(0, -1)
+      const url = (getAllFixture) ? filteredPrefix : `${filteredPrefix}_page=${state.page}`
+      const res = await fetch(url)
+      commit('GET_FIXTURES', res.data)
     } catch (err) {
-      console.log(err)
+      console.log('Action: getFixtures\n', err)
     }
   },
-  async updateFixtureFilters ({ commit, dispatch, state }, { name, value }) {
-    const index = state.filters.findIndex(f => f.name === name)
-    index !== -1 ? commit('UPDATE_FIXTURE_FILTER', { index, value }) : commit('ADD_FIXTURE_FILTER', { name, value })
+  async updateFixtureFilter ({ commit, state }, { name, value }) {
+    state.filter[name] === undefined
+    ? commit('UPDATE_FIXTURE_FILTER', { name, value })
+    : commit('ADD_FIXTURE_FILTER', { name, value })
   },
-  clearFixtureFilters ({ commit, dispatch }) {
-    commit('CLEAR__FIXTURE_FILTERS')
+  clearFixtureFilter ({ commit }) {
+    commit('CLEAR_FIXTURE_FILTER')
   },
   updateFixturePage ({ commit, dispatch }, mode = 'NEXT') {
     switch (mode) {
@@ -36,12 +40,11 @@ export default {
         break
       default:
     }
-    dispatch('getFilters')
   },
-  nextPage ({ commit }) {
+  nextPage ({ commit }, value) {
     commit('NEXT_FILTER_PAGE')
   },
-  prevPage ({ commit }) {
+  prevPage ({ commit }, value) {
     commit('PREV_FILTER_PAGE')
   }
 }

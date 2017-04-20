@@ -7,5 +7,9 @@ export default {
   },
   GET_CLUB_BY_ID (store, nextState) {
     store.club = nextState
+  },
+  CLEAR_FIXTURE_FILTER (store, nextState) {
+    store.filter = {}
   }
+
 }

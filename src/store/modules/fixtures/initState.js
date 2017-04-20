@@ -1,6 +1,6 @@
 export default {
   fixtures: [],
   fixture: {},
-  filters: [],
+  filter: {},
   page: 1
 }
