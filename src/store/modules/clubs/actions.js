@@ -1,14 +1,28 @@
 import { fetch } from '../../lib'
 
 export default {
-  getAllClubs ({ commit }) {
-    fetch(`clubs`)
-      .then(res => commit('GET_ALL_CLUBS', res))
-      .catch(console.error)
+  async getAllClubs ({ commit }) {
+    try {
+      const res = await fetch('clubs')
+      commit('GET_ALL_CLUBS', res.data)
+    } catch (err) {
+      console.error(err)
+    }
   },
-  getClubByName ({ commit }, name) {
-    fetch(`clubs?name=${name}`)
-      .then(res => commit('GET_CLUB_BY_NAME', res))
-      .catch(console.err)
+  async getClubByName ({ commit }, name) {
+    try {
+      const res = await fetch(`clubs?name=${name}`)
+      commit('GET_CLUB_BY_NAME', res.data[0])
+    } catch (err) {
+      console.error(err)
+    }
+  },
+  async getClubById ({ commit }, id) {
+    try {
+      const res = await fetch(`club?id=${id}`)
+      commit('GET_CLUB_BY_ID', res.data[0])
+    } catch (err) {
+      console.error(err)
+    }
   }
 }

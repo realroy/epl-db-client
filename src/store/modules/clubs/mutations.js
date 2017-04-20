@@ -3,9 +3,9 @@ export default {
     store.clubs = nextState
   },
   GET_CLUB_BY_NAME (store, nextState) {
-    store.club = nextState[0]
+    store.club = nextState
   },
-  UPDATE_DETAIL_TAB (store, nextState) {
-    store.detailTab = nextState
+  GET_CLUB_BY_ID (store, nextState) {
+    store.club = nextState
   }
 }
