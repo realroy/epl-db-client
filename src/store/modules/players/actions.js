@@ -1,9 +1,4 @@
-import { fetch } from '../../lib'
-
-const createFilteredUrl = (url, {name, value}) => {
-  if (value !== 'none') return url + `${name}=${value}&`
-  else return url
-}
+import { fetch, createFilteredUrl } from '../../lib'
 
 export default {
   getPlayerById ({ commit }, id) {

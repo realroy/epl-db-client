@@ -1,48 +1,49 @@
-import { fetch } from '../../lib'
-
-const createFilteredUrl = (url, {name, value}) => {
-  if (value !== 'none') return url + `${name}=${value}&`
-  else return url
-}
+import { fetch, createFilteredUrl } from '../../lib'
 
 export default {
-  getPlayerById ({ commit }, id) {
-    fetch(`players/${id}`)
-      .then(res => commit('GET_PLAYER_BY_ID', res))
-      .catch(console.error)
+  async getFixtureById ({ commit }, id) {
+    try {
+      const res = await fetch(`fixtures/${id}`)
+      commit('GET_FIXTURE_BY_ID', res.data)
+    } catch (err) {
+      console.log(err)
+    }
   },
-  getPlayers ({ commit, state }, all = false) {
-    const url = state.filters.reduce(createFilteredUrl, 'players?')
-    const result = (all) ? url : `${url}_page=${state.page}`
-    fetch(result)
-      .then(res => commit('GET_PLAYERS', res))
-      .catch(console.error)
+  async getFixtures ({ commit, state }, all = false) {
+    try {
+      const url = state.filters.reduce(createFilteredUrl, 'fixtures?')
+      const result = (all) ? url : `${url}_page=${state.page}`
+      const res = await fetch(result)
+      commit('GET_PLAYERS', res.data)
+    } catch (err) {
+      console.log(err)
+    }
   },
-  updateFilters ({ commit, dispatch, state }, { name, value }) {
+  async updateFixtureFilters ({ commit, dispatch, state }, { name, value }) {
     const index = state.filters.findIndex(f => f.name === name)
-    index !== -1 ? commit('UPDATE_FILTER', { index, value }) : commit('ADD_FILTER', { name, value })
+    index !== -1 ? commit('UPDATE_FIXTURE_FILTER', { index, value }) : commit('ADD_FIXTURE_FILTER', { name, value })
     dispatch('getPlayers')
   },
-  clearFilters ({ commit, dispatch }) {
-    commit('CLEAR_FILTERS')
-    dispatch('getPlayers')
+  clearFixtureFilters ({ commit, dispatch }) {
+    commit('CLEAR__FIXTURE_FILTERS')
+    dispatch('getFixtures')
   },
-  updatePage ({ commit, dispatch }, mode = 'NEXT') {
+  updateFixturePage ({ commit, dispatch }, mode = 'NEXT') {
     switch (mode) {
       case 'NEXT':
-        dispatch('nextPage')
+        dispatch('nextFilterPage')
         break
       case 'PREV':
-        dispatch('prevPage')
+        dispatch('prevFilterPage')
         break
       default:
     }
-    dispatch('getPlayers')
+    dispatch('getFilters')
   },
   nextPage ({ commit }) {
-    commit('NEXT_PAGE')
+    commit('NEXT_FILTER_PAGE')
   },
   prevPage ({ commit }) {
-    commit('PREV_PAGE')
+    commit('PREV_FILTER_PAGE')
   }
 }
