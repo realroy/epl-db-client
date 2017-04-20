@@ -29,6 +29,9 @@
       return {
         routes: [
           {name: 'Home', path: '/'},
+          {name: 'Fixtures', path: '/fixtures'},
+          {name: 'Results', path: '/results'},
+          {name: 'Tables', path: '/tables'},
           {name: 'Ranking', path: '/ranking'},
           {name: 'Club', path: '/clubs'},
           {name: 'Players', path: '/players'},
