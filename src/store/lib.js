@@ -7,3 +7,8 @@ export const fetch = async (url) => {
   const res = await axios.get(`${API_ENDPOINT}/${url}`)
   return res.data
 }
+
+export const createFilteredUrl = (url, {name, value}) => {
+  if (value !== 'none') return url + `${name}=${value}&`
+  else return url
+}
