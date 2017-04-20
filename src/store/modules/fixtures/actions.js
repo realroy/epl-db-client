@@ -22,11 +22,9 @@ export default {
   async updateFixtureFilters ({ commit, dispatch, state }, { name, value }) {
     const index = state.filters.findIndex(f => f.name === name)
     index !== -1 ? commit('UPDATE_FIXTURE_FILTER', { index, value }) : commit('ADD_FIXTURE_FILTER', { name, value })
-    dispatch('getPlayers')
   },
   clearFixtureFilters ({ commit, dispatch }) {
     commit('CLEAR__FIXTURE_FILTERS')
-    dispatch('getFixtures')
   },
   updateFixturePage ({ commit, dispatch }, mode = 'NEXT') {
     switch (mode) {
