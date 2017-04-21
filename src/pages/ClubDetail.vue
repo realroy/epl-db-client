@@ -16,11 +16,11 @@
         }
       ]"
       :footerList="[
-        {name: 'Overview', path: `${club.id}/overview`},
-        {name: 'Squad', path: `${club.id}/squad`},
-        {name: 'Fixtures', path: `${club.id}/fixtures`},
-        {name: 'Results', path: `${club.id}/results`},
-        {name: 'Stats', path: `${club.id}/stats`}
+        {name: 'Overview', path: `/club/${$router.currentRoute.params.id}/overview`},
+        {name: 'Squad', path: `/club/${$router.currentRoute.params.id}/squad`},
+        {name: 'Fixtures', path: `/club/${$router.currentRoute.params.id}/fixtures`},
+        {name: 'Results', path: `/club/${$router.currentRoute.params.id}/results`},
+        {name: 'Stats', path: `/club/${$router.currentRoute.params.id}/stats`}
       ]"
     ></detail-hero>
     <br>
@@ -45,6 +45,7 @@ export default {
     this.getClubById(id)
     this.updatePlayerFilter({name: 'club_id', value: id})
     this.getPlayers({allPage: true})
+    this.$router.push(`/club/${id}/overview`)
   },
   components: {
     ClubFixture,

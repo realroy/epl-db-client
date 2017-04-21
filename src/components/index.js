@@ -1,5 +1,6 @@
 import ClubCard from './ClubCard'
 import ClubFixture from './ClubFixture'
+import ClubOverview from './ClubOverview'
 import ClubSquad from './ClubSquad'
 import CustomLevel from './CustomLevel'
 import CustomTable from './CustomTable'
@@ -16,6 +17,7 @@ import SideBox from './SideBox'
 export {
   ClubCard,
   ClubFixture,
+  ClubOverview,
   ClubSquad,
   CustomLevel,
   CustomTable,
