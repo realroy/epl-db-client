@@ -1,5 +1,5 @@
 <template>
-  <section class="hero is-primary">
+  <section class="hero is-danger">
       <div class="hero-body">
         <div class="container has-text-centered">
           <img v-if="hasImage" :src="picUrl" width="128">
@@ -18,14 +18,15 @@
         </div>
       </div>
       <div class="hero-foot" v-if="footerList.length > 0">
-        <nav class="tabs">
-          <div class="container">
+        <nav class="tabs is-boxed is-centered is-fullwidth">
             <ul>
-              <li v-for="(f, i) in footerList">
-                <router-link :to="f.path">{{ f.name }}</router-link>
-              </li>
+              <router-link
+                active-class="is-active"
+                :to="f.path"
+                v-for="(f, i) in footerList"  >
+                <span>{{ f.name }}</span>
+              </router-link>
             </ul>
-          </div>
         </nav>
       </div>
     </section>

@@ -21,7 +21,7 @@ export default {
       console.log('Action: getFixtures\n', err)
     }
   },
-  async updateFixtureFilter ({ commit, state }, { name, value }) {
+  updateFixtureFilter ({ commit, state }, { name, value }) {
     state.filter[name] === undefined
     ? commit('UPDATE_FIXTURE_FILTER', { name, value })
     : commit('ADD_FIXTURE_FILTER', { name, value })

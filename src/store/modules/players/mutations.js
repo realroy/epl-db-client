@@ -5,19 +5,19 @@ export default {
   GET_PLAYERS (store, nextState) {
     store.players = nextState
   },
-  ADD_FILTER (store, nextState) {
-    store.filters = [...store.filters, nextState]
+  REMOVE_PLAYER_FILTER (store, { name }) {
+    delete store.filter[name]
   },
-  UPDATE_FILTER (store, { index, value }) {
-    store.filters[index].value = value
+  UPDATE_PLAYER_FILTER (store, { name, value }) {
+    store.filter[name] = value
   },
-  CLEAR_FILTERS (store) {
-    store.filters = []
+  CLEAR_PLAYER_FILTER (store) {
+    store.filter = {}
   },
-  NEXT_PAGE (store) {
+  NEXT_PLAYER_PAGE (store) {
     store.page++
   },
-  PREV_PAGE (store) {
+  PREV_PLAYER_PAGE (store) {
     store.page = (store.page - 1 === 0) ? store.page : store.page--
   }
 }

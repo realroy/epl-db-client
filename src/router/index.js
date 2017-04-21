@@ -52,7 +52,7 @@ export default new Router({
       component: ResultPage
     },
     {
-      path: '/player/:id',
+      path: '/player/:id/',
       name: 'PlayerDetail',
       component: PlayerDetail
     },

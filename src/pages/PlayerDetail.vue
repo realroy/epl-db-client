@@ -3,25 +3,24 @@
     <player-hero
       :number="player.number"
       :name="player.name"
-      :clubName="player.club_name"
+      :clubName="player.club_id"
       :position="player.position">
     </player-hero>
     <br>
-    <div class="columns is-mobile is-multiline">
-      <div class="column"></div>
-      <div class="column is-2">
-        <sidebox
-          :name="'Personal Details'"
-          :info="[
-            {name: 'Nationality', value: player.nationality},
-            {name: 'Age', value: 0},
-            {name: 'Date of birth', value: player.dob},
-            {name: 'Height', value: player.height},
-            {name: 'Weight', value: player.weight},
-          ]"></sidebox>
-      </div>
-      <div class="column">
-        <div class="container">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3">
+          <sidebox
+            :name="'Personal Details'"
+            :info="[
+              {name: 'Nationality', value: player.nationality},
+              {name: 'Age', value: 0},
+              {name: 'Date of birth', value: player.dob},
+              {name: 'Height', value: player.height},
+              {name: 'Weight', value: player.weight},
+            ]"></sidebox>
+        </div>
+        <div class="column">
           <custom-level
             :name="'Overview'"
             :info="[
@@ -30,8 +29,6 @@
               {name: 'Goals', value: 0},
               {name: 'Assists', value: 0},]">
           </custom-level>
-          <br>
-          <br>
           <br>
           <div class="columns">
             <div class="column">
@@ -43,7 +40,7 @@
                 ]"
               ></sidebox>
             </div>
-            <div class="column" v-show="player.position=='GoalKeeper'">
+            <div class="column" v-show="player.position==='GoalKeeper'">
               <sidebox
                 :name="'GoalKeeping'"
                 :info="[
@@ -74,7 +71,6 @@
           </div>
         </div>
       </div>
-      <div class="column"></div>
     </div>
   </div>
 </template>
@@ -86,7 +82,8 @@ import CustomLevel from '../components/CustomLevel'
 import PlayerHero from '../components/PlayerHero'
 export default {
   created () {
-    this.getPlayerById(this.$router.currentRoute.params.id)
+    const { id } = this.$router.currentRoute.params
+    this.getPlayerById(id)
   },
   components: {
     CustomLevel,

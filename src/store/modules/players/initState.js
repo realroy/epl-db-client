@@ -1,6 +1,6 @@
 export default {
   player: {},
   players: [],
-  filters: [],
+  filter: {},
   page: 1
 }

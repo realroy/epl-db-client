@@ -5,16 +5,11 @@
     <div class="container">
       <filter-bar
         :name="'player'"
-        :filters="filters"
+        :filters="filterList"
         :onUpdate="onUpdate"
         :onReset="onReset"
         :results="filters"
       ></filter-bar>
-      <nav class="pagination is-centered">
-        <a class="pagination-previous" @click="updatePage('PREV')">< Previous</a>
-        <a class="pagination-next" @click="updatePage('NEXT')">Next page ></a>
-      </nav>
-      <br>
       <player-table :players="players"></player-table>
       <br>
     </div>
@@ -29,7 +24,8 @@ import Hero from '../components/Hero'
 import PlayerTable from '../components/PlayerTable'
 export default {
   created () {
-    this.clearFilters()
+    this.clearPlayerFilter()
+    this.getPlayers()
   },
   components: {
     FilterBar,
@@ -39,33 +35,38 @@ export default {
   computed: {
     ...mapState({
       players: state => state.players.players,
-      clubs: state => state.clubs.clubs,
-      filters: state => state.platers.filters
+      clubs: state => state.clubs.clubs
     }),
-    filters () {
+    filterList () {
+      const clubNames = this.clubs.map(({ name }) => name)
       return [
         {
-          name: 'position',
+          name: 'Filter By Position',
+          type: 'position',
           data: ['Goalkeeper', 'Defender', 'Midfielder', 'Forward']
         },
         {
-          name: 'club_name',
-          data: this.clubs.map(({name}) => name)
+          name: 'Filter By Club',
+          type: 'club_id',
+          data: clubNames
         },
         {
-          name: 'nationality',
-          data: ['British']
+          name: 'Filter By Nationality',
+          type: 'nationality',
+          data: ['France']
         }
       ]
     }
   },
   methods: {
-    ...mapActions(['updatePage', 'getPlayers', 'updateFilters', 'clearFilters']),
+    ...mapActions(['updatePlayerPage', 'getPlayers', 'updatePlayerFilter', 'clearPlayerFilter']),
     onUpdate ({name, value}) {
-      this.updateFilters({ name, value })
+      this.updatePlayerFilter({ name, value })
+      this.getPlayers()
     },
     onReset () {
-      this.clearFilters()
+      this.clearPlayerFilter()
+      this.getPlayers()
     }
 
   }

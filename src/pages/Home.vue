@@ -1,8 +1,14 @@
 <template>
   <div>
     <hero></hero>
-    <div class="container is-multiline is-mobile">
-      <custom-table :head="head" :body="body"></custom-table>
+    <div>
+      <div class="columns">
+        <div class="column is-3">
+          <custom-table :head="head" :body="body"></custom-table>
+        </div>
+        <div class="column"></div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -47,7 +53,7 @@
     },
     data () {
       return {
-        head: ['Position ', 'Club', 'Played', 'Won', 'Drawn', 'Lost', 'Point']
+        head: ['Pos ', 'Club', 'Pld', 'W', 'D', 'L', 'Pts']
       }
     },
     methods: {

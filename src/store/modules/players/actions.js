@@ -1,43 +1,48 @@
-import { fetch, createFilteredUrl } from '../../lib'
+import { fetch } from '../../lib'
 
 export default {
-  getPlayerById ({ commit }, id) {
-    fetch(`players/${id}`)
-      .then(res => commit('GET_PLAYER_BY_ID', res))
-      .catch(console.error)
+  async getPlayerById ({ commit }, id) {
+    try {
+      const data = await fetch(`players/${id}`)
+      commit('GET_PLAYER_BY_ID', data)
+    } catch (err) {
+      console.error(err)
+    }
   },
-  getPlayers ({ commit, state }, all = false) {
-    const url = state.filters.reduce(createFilteredUrl, 'players?')
-    const result = (all) ? url : `${url}_page=${state.page}`
-    fetch(result)
-      .then(res => commit('GET_PLAYERS', res))
-      .catch(console.error)
+  async getPlayers ({ commit, state }, allPage = false) {
+    try {
+      const startPrefix = 'players?'
+      const filteredUrl = Object.keys(state.filter).reduce((url, key) => url + `${key}=${state.filter[key]}&`, startPrefix)
+      const url = (allPage) ? filteredUrl : `${filteredUrl}_page=${state.page}`
+      const data = await fetch(url)
+      commit('GET_PLAYERS', data)
+    } catch (err) {
+      console.error(err)
+    }
   },
-  updateFilters ({ commit, dispatch, state }, { name, value }) {
-    const index = state.filters.findIndex(f => f.name === name)
-    index !== -1 ? commit('UPDATE_FILTER', { index, value }) : commit('ADD_FILTER', { name, value })
-    dispatch('getPlayers')
+  updatePlayerFilter ({ commit, dispatch, state }, { name, value }) {
+    value === ''
+    ? commit('REMOVE_PLAYER_FILTER', { name })
+    : commit('UPDATE_PLAYER_FILTER', { name, value })
   },
-  clearFilters ({ commit, dispatch }) {
-    commit('CLEAR_FILTERS')
-    dispatch('getPlayers')
+  clearPlayerFilter ({ commit }) {
+    commit('CLEAR_PLAYER_FILTER')
   },
-  updatePage ({ commit, dispatch }, mode = 'NEXT') {
+  updatePlayerPage ({ commit, dispatch }, mode = 'NEXT') {
     switch (mode) {
       case 'NEXT':
-        dispatch('nextPage')
+        dispatch('nextPlayerPage')
         break
       case 'PREV':
-        dispatch('prevPage')
+        dispatch('prevPlayerPage')
         break
       default:
     }
-    dispatch('getPlayers')
   },
-  nextPage ({ commit }) {
-    commit('NEXT_PAGE')
+  nextPlayerPage ({ commit }) {
+    commit('NEXT_PLAYER_PAGE')
   },
-  prevPage ({ commit }) {
-    commit('PREV_PAGE')
+  prevPlayerPage ({ commit }) {
+    commit('PREV_PLAYER_PAGE')
   }
 }

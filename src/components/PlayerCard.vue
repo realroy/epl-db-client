@@ -12,7 +12,7 @@
               <strong>Position: </strong>
               <span class="is-pulled-right">{{ info.position }}</span><br>
               <strong>Club: </strong>
-              <span class="is-pulled-right">{{ info.club_name }}</span><br>
+              <span class="is-pulled-right">{{ info.club_id }}</span><br>
               <strong>Nationality: </strong>
               <span class="is-pulled-right">{{ info.nationality }}</span>
             </p>
@@ -43,19 +43,3 @@
   }
 
 </script>
-
-<style lang="css" scoped>
-  .card {
-    display: flex;
-    flex-direction: column;
-  }
-  .cart-footer {
-    margin-top: auto;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .3s
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0
-  }
-</style>

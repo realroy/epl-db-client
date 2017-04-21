@@ -1,8 +1,8 @@
 <template>
-  <div class="card" @click="viewMore(info.name)">
+  <div class="card" @click="viewMore(info.id)">
     <div class="card-image">
       <figure class="image is-1by1">
-        <img :src="'/static/club-badge/' + info.name + '.svg'" alt="ClubBadge">
+        <img :src="'/static/club-badge/' + info.id + '.svg'" alt="ClubBadge">
       </figure>
     </div>
     <div class="card-content">
@@ -29,8 +29,8 @@
       }
     },
     methods: {
-      viewMore (name) {
-        this.$router.push(`club/${name}`)
+      viewMore (id) {
+        this.$router.push(`club/${id}`)
       }
     }
   }

@@ -3,7 +3,7 @@
     <detail-hero
       :title="club.name"
       :hasImage="true"
-      :picUrl="'/static/club-badge/' + club.name + '.svg'"
+      :picUrl="'/static/club-badge/' + $router.currentRoute.params.id + '.svg'"
       :subtitles="[
         {
           name: 'Stadium Name',
@@ -16,11 +16,11 @@
         }
       ]"
       :footerList="[
-        {name: 'Overview', path: `/club/${club.name}/overview`},
-        {name: 'Squad', path: `/club/${club.name}/squad`},
-        {name: 'Fixtures', path: `/club/${club.name}/fixtures`},
-        {name: 'Results', path: `/club/${club.name}/results`},
-        {name: 'Stats', path: `/club/${club.name}/stats`}
+        {name: 'Overview', path: `${club.id}/overview`},
+        {name: 'Squad', path: `${club.id}/squad`},
+        {name: 'Fixtures', path: `${club.id}/fixtures`},
+        {name: 'Results', path: `${club.id}/results`},
+        {name: 'Stats', path: `${club.id}/stats`}
       ]"
     ></detail-hero>
     <br>
@@ -39,10 +39,10 @@ import CustomLevel from '../components/CustomLevel'
 import DetailHero from '../components/DetailHero'
 export default {
   created () {
-    const clubName = this.$router.currentRoute.params.name
-    this.clearFilters()
-    this.getClubByName(clubName)
-    this.updateFilters({name: 'club_name', value: clubName})
+    const { id } = this.$router.currentRoute.params
+    this.clearPlayerFilter()
+    this.getClubById(id)
+    this.updatePlayerFilter({name: 'club_id', value: id})
     this.getPlayers(true)
   },
   components: {
@@ -58,7 +58,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getClubByName', 'updateFilters', 'getPlayers', 'clearFilters'])
+    ...mapActions(['getClubById', 'updatePlayerFilter', 'getPlayers', 'clearPlayerFilter'])
   }
 }
 </script>

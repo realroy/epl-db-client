@@ -8,7 +8,4 @@ export const fetch = async (url) => {
   return res.data
 }
 
-export const createFilteredUrl = (url, {name, value}) => {
-  if (value !== 'none') return url + `${name}=${value}&`
-  else return url
-}
+export const createFilteredUrl = (url, { name, value }) => url + `${name}=${value}&`
