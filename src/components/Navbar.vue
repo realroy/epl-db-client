@@ -3,7 +3,7 @@
     <div class="container">
       <div class="nav-left">
         <router-link to="/" class="nav-item">
-          <img src="../assets/premier-league-logo-header.svg" alt="logo">
+          <img src="/static/Premier_League_Logo.svg" alt="logo">
         </router-link>
         <router-link
           v-for="(r, i) in routes"

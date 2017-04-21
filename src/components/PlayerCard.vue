@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="card" @click="viewMore(info.id)">
       <div class="card-image">
-        <img src="../assets/Player-Photo-Missing.png"/>
+        <img src="/static/Player-Photo-Missing.png"/>
       </div>
       <div class="card-content">
         <div class="media">

@@ -1,6 +1,6 @@
 export default {
   GET_RANKING (store, data) {
-    store.rankings = data
+    store.ranking = data
   },
   GET_MANAGERS (store, data) {
     store.managers = data

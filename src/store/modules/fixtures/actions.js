@@ -14,10 +14,9 @@ export default {
       const startPrefix = 'fixtures?'
       const filteredPrefix = Object.keys(state.filter)
         .reduce(createFilteredUrl, startPrefix)
-        .slice(0, -1)
       const url = (getAllFixture) ? filteredPrefix : `${filteredPrefix}_page=${state.page}`
       const res = await fetch(url)
-      commit('GET_FIXTURES', res.data)
+      commit('GET_FIXTURES', res)
     } catch (err) {
       console.log('Action: getFixtures\n', err)
     }

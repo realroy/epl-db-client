@@ -57,7 +57,7 @@ export default new Router({
       component: PlayerDetail
     },
     {
-      path: '/club/:name',
+      path: '/club/:id',
       name: 'ClubDetail',
       component: ClubDetail,
       children: [
