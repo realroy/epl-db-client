@@ -40,10 +40,11 @@ import DetailHero from '../components/DetailHero'
 export default {
   created () {
     const { id } = this.$router.currentRoute.params
+    this.clearPlayers()
     this.clearPlayerFilter()
     this.getClubById(id)
     this.updatePlayerFilter({name: 'club_id', value: id})
-    this.getPlayers(true)
+    this.getPlayers({allPage: true})
   },
   components: {
     ClubFixture,
@@ -58,7 +59,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getClubById', 'updatePlayerFilter', 'getPlayers', 'clearPlayerFilter'])
+    ...mapActions(['getClubById', 'updatePlayerFilter', 'getPlayers', 'clearPlayerFilter', 'clearPlayers'])
   }
 }
 </script>

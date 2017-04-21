@@ -8,9 +8,8 @@
         :filters="filterList"
         :onUpdate="onUpdate"
         :onReset="onReset"
-        :results="filters"
       ></filter-bar>
-      <player-table :players="players"></player-table>
+      <player-table :isInfinite="true" :players="players"></player-table>
       <br>
     </div>
   </div>
@@ -24,8 +23,9 @@ import Hero from '../components/Hero'
 import PlayerTable from '../components/PlayerTable'
 export default {
   created () {
+    this.resetPlayerPage()
+    this.clearPlayers()
     this.clearPlayerFilter()
-    this.getPlayers()
   },
   components: {
     FilterBar,
@@ -38,7 +38,6 @@ export default {
       clubs: state => state.clubs.clubs
     }),
     filterList () {
-      const clubNames = this.clubs.map(({ name }) => name)
       return [
         {
           name: 'Filter By Position',
@@ -48,7 +47,7 @@ export default {
         {
           name: 'Filter By Club',
           type: 'club_id',
-          data: clubNames
+          data: this.clubs.map(({ name }) => name)
         },
         {
           name: 'Filter By Nationality',
@@ -59,14 +58,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['updatePlayerPage', 'getPlayers', 'updatePlayerFilter', 'clearPlayerFilter']),
+    ...mapActions(['updatePlayerPage', 'getPlayers', 'updatePlayerFilter', 'clearPlayerFilter', 'clearPlayers', 'resetPlayerPage']),
     onUpdate ({name, value}) {
+      this.clearPlayers()
       this.updatePlayerFilter({ name, value })
-      this.getPlayers()
+      this.getPlayers({ allPage: false })
     },
     onReset () {
+      this.resetPlayerPage()
+      this.clearPlayers()
       this.clearPlayerFilter()
-      this.getPlayers()
+      this.getPlayers({ allPage: false })
     }
 
   }

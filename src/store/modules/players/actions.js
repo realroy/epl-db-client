@@ -9,13 +9,14 @@ export default {
       console.error(err)
     }
   },
-  async getPlayers ({ commit, state }, allPage = false) {
+  async getPlayers ({ commit, state }, { allPage = false, cb }) {
     try {
       const startPrefix = 'players?'
       const filteredUrl = Object.keys(state.filter).reduce((url, key) => url + `${key}=${state.filter[key]}&`, startPrefix)
       const url = (allPage) ? filteredUrl : `${filteredUrl}_page=${state.page}`
       const data = await fetch(url)
       commit('GET_PLAYERS', data)
+      if (cb !== undefined) cb()
     } catch (err) {
       console.error(err)
     }
@@ -28,7 +29,7 @@ export default {
   clearPlayerFilter ({ commit }) {
     commit('CLEAR_PLAYER_FILTER')
   },
-  updatePlayerPage ({ commit, dispatch }, mode = 'NEXT') {
+  async updatePlayerPage ({ commit, dispatch, state }, mode = 'NEXT') {
     switch (mode) {
       case 'NEXT':
         dispatch('nextPlayerPage')
@@ -39,10 +40,16 @@ export default {
       default:
     }
   },
+  resetPlayerPage ({ commit }) {
+    commit('RESET_PLAYER_PAGE')
+  },
   nextPlayerPage ({ commit }) {
     commit('NEXT_PLAYER_PAGE')
   },
   prevPlayerPage ({ commit }) {
     commit('PREV_PLAYER_PAGE')
+  },
+  clearPlayers ({ commit }) {
+    commit('CLEAR_PLAYERS')
   }
 }

@@ -23,7 +23,9 @@
               <router-link
                 active-class="is-active"
                 :to="f.path"
-                v-for="(f, i) in footerList"  >
+                v-for="(f, i) in footerList"
+                :key="i"
+                >
                 <span>{{ f.name }}</span>
               </router-link>
             </ul>

@@ -15,7 +15,7 @@ export default {
   created () {
     this.getAllClubs()
     this.getManagers()
-    this.getPlayers()
+    this.getPlayers({ allPage: false })
   },
   name: 'app',
   components: {

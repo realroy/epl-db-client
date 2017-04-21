@@ -3,7 +3,7 @@ export default {
     store.player = nextState
   },
   GET_PLAYERS (store, nextState) {
-    store.players = nextState
+    store.players = [...store.players, ...nextState]
   },
   REMOVE_PLAYER_FILTER (store, { name }) {
     delete store.filter[name]
@@ -19,5 +19,11 @@ export default {
   },
   PREV_PLAYER_PAGE (store) {
     store.page = (store.page - 1 === 0) ? store.page : store.page--
+  },
+  CLEAR_PLAYERS (store) {
+    store.players = []
+  },
+  RESET_PLAYER_PAGE (store) {
+    store.page = 1
   }
 }

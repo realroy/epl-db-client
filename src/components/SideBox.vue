@@ -7,12 +7,12 @@
     </div>
     <div class="card-content">
       <div class="content">
-        <div class="columns">
-          <div class="column has-text-left">
-            <span v-for="i in info">{{ i.name }}<br></span>
+        <div class="columns is-mutiline" v-for="i in info">
+          <div class="column is-6">
+            <h5>{{ i.name }}</h5>
           </div>
-          <div class="column has-text-right">
-            <small v-for="i in info" >{{ i.value }}<br></small>
+          <div class="column is-6 has-text-right">
+            <span>{{ i.value }}</span>
           </div>
         </div>
       </div>
@@ -20,6 +20,7 @@
 
   </div>
 </template>
+
 
 <script>
   export default {
