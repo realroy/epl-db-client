@@ -7,18 +7,9 @@
   </thead>
   <tbody>
     <tr v-for="(b, i) in body" :key="i">
-      <td v-for="(each, j) in b" :key="j">
-        <div v-if="each.link !== undefined">
-          <router-link v-if="each.link.type === 'IN'" :to="each.link.value">
-            {{ each.value }}
-          </router-link>
-          <a v-else-if="each.link.type === 'OUT'" :href="each.link.value">
-            {{ each.value }}
-          </a>
-        </div>
-        <div v-bind:class="{'tag is-danger': each.isTag }" v-else>
-          {{ each.value }}
-        </div>
+      <td v-for="each in b">
+        <router-link v-if="each.link !== undefined" :to="each.link">{{ each.value }}</router-link>
+        <span v-else-if="each.hasTag" class="tag is-danger">{{ each.value }}</span>
       </td>
     </tr>
   </tbody>
@@ -35,11 +26,8 @@
         }
       },
       body: {
-        type: Array,
-        required: true,
-        default () {
-          return []
-        }
+        type: Function,
+        required: true
       }
     }
   }

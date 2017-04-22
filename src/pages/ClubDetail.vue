@@ -52,7 +52,17 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getClubById', 'updatePlayerFilter', 'getPlayers', 'clearPlayerFilter', 'clearPlayers'])
+    ...mapActions([
+      'getClubById',
+      'getFixtures',
+      'updatePlayerFilter',
+      'updateFixtureFilter',
+      'getPlayers',
+      'clearPlayerFilter',
+      'clearFixtureFilter',
+      'clearPlayers',
+      'clearFixtureFilter'
+    ])
   }
 }
 </script>

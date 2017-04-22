@@ -14,7 +14,7 @@ import {
   ResultPage
 } from '@/pages'
 
-import { PlayerTable, ClubOverview, FixtureTable } from '@/components'
+import { PlayerTable, ClubOverview, FixtureTable, ClubStats } from '@/components'
 
 Vue.use(Router)
 
@@ -45,6 +45,7 @@ export default new Router({
       path: '/fixtures',
       name: 'Fixtures',
       component: FixturePage
+
     },
     {
       path: '/results',
@@ -59,13 +60,14 @@ export default new Router({
     {
       path: '/club/:id',
       name: 'ClubDetail',
+      redirect: '/club/:id/overview',
       component: ClubDetail,
       children: [
         { path: 'overview', component: ClubOverview },
         { path: 'squad', component: PlayerTable },
-        { path: 'fixtures', component: FixtureTable },
+        { path: 'fixtures', component: FixtureTable, props: {} },
         { path: 'results', component: PlayerTable },
-        { path: 'stats', component: PlayerTable }
+        { path: 'stats', component: ClubStats }
       ]
     },
     {

@@ -1,6 +1,7 @@
 import ClubCard from './ClubCard'
 import ClubOverview from './ClubOverview'
 import ClubSquad from './ClubSquad'
+import ClubStats from './ClubStats'
 import CustomLevel from './CustomLevel'
 import CustomTable from './CustomTable'
 import DetailHero from './DetailHero'
@@ -18,6 +19,7 @@ export {
   ClubCard,
   ClubOverview,
   ClubSquad,
+  ClubStats,
   CustomLevel,
   CustomTable,
   DetailHero,

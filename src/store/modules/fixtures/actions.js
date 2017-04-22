@@ -1,4 +1,4 @@
-import { fetch, createFilteredUrl } from '../../lib'
+import { fetch } from '../../lib'
 
 export default {
   async getFixtureById ({ commit }, id) {
@@ -9,22 +9,23 @@ export default {
       console.log('Action: getFixtureById\n', err)
     }
   },
-  async getFixtures ({ commit, state }, getAllFixture = false) {
+  async getFixtures ({ commit, state }, { allPage = false, cb }) {
     try {
       const startPrefix = 'fixtures?'
       const filteredPrefix = Object.keys(state.filter)
-        .reduce(createFilteredUrl, startPrefix)
-      const url = (getAllFixture) ? filteredPrefix : `${filteredPrefix}_page=${state.page}`
-      const res = await fetch(url)
-      commit('GET_FIXTURES', res)
+        .reduce((url, key) => url + `${key}=${state.filter[key]}&`, startPrefix)
+      const url = (allPage) ? filteredPrefix : `${filteredPrefix}_page=${state.page}`
+      const data = await fetch(url)
+      commit('GET_FIXTURES', data)
+      if (cb !== undefined) cb()
     } catch (err) {
       console.log('Action: getFixtures\n', err)
     }
   },
   updateFixtureFilter ({ commit, state }, { name, value }) {
     state.filter[name] === undefined
-    ? commit('UPDATE_FIXTURE_FILTER', { name, value })
-    : commit('ADD_FIXTURE_FILTER', { name, value })
+    ? commit('REMOVE_FIXTURE_FILTER', { name })
+    : commit('UPDATE_FIXTURE_FILTER', { name, value })
   },
   clearFixtureFilter ({ commit }) {
     commit('CLEAR_FIXTURE_FILTER')
@@ -40,10 +41,16 @@ export default {
       default:
     }
   },
-  nextPage ({ commit }, value) {
+  resetFixturePage ({ commit }) {
+    commit('RESET_FIXTURE_PAGE')
+  },
+  nextFilterPage ({ commit }) {
     commit('NEXT_FILTER_PAGE')
   },
-  prevPage ({ commit }, value) {
+  prevFilterPage ({ commit }) {
     commit('PREV_FILTER_PAGE')
+  },
+  clearFixtures ({ commit }) {
+    commit('CLEAR_FIXTURES')
   }
 }

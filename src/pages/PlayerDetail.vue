@@ -40,9 +40,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 import { mapState, mapActions } from 'vuex'
 import Sidebox from '../components/SideBox'

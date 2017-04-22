@@ -12,8 +12,8 @@ export default {
   async getPlayers ({ commit, state }, { allPage = false, cb }) {
     try {
       const startPrefix = 'players?'
-      const filteredUrl = Object.keys(state.filter).reduce((url, key) => url + `${key}=${state.filter[key]}&`, startPrefix)
-      const url = (allPage) ? filteredUrl : `${filteredUrl}_page=${state.page}`
+      const filteredPrefix = Object.keys(state.filter).reduce((url, key) => url + `${key}=${state.filter[key]}&`, startPrefix)
+      const url = (allPage) ? filteredPrefix : `${filteredPrefix}_page=${state.page}`
       const data = await fetch(url)
       commit('GET_PLAYERS', data)
       if (cb !== undefined) cb()
@@ -29,7 +29,7 @@ export default {
   clearPlayerFilter ({ commit }) {
     commit('CLEAR_PLAYER_FILTER')
   },
-  async updatePlayerPage ({ commit, dispatch, state }, mode = 'NEXT') {
+  updatePlayerPage ({ commit, dispatch, state }, mode = 'NEXT') {
     switch (mode) {
       case 'NEXT':
         dispatch('nextPlayerPage')
