@@ -1,6 +1,7 @@
+import AdminPage from './Admin'
 import ClubPage from './Clubs'
 import ClubDetail from './ClubDetail'
-import DashboardPage from './Dashboard'
+import Dashboard from './Dashboard'
 import FixturePage from './Fixtures'
 import HomePage from './Home'
 import LoginPage from './Login'
@@ -10,9 +11,10 @@ import PlayerPage from './Players'
 import ResultPage from './Results'
 
 export {
+  AdminPage,
   ClubPage,
   ClubDetail,
-  DashboardPage,
+  Dashboard,
   FixturePage,
   HomePage,
   LoginPage,

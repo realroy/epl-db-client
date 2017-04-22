@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav has-shadow">
+  <nav class="nav has-shadow" v-if="!$store.isValidAuth">
     <div class="container">
       <div class="nav-left">
         <router-link to="/" class="nav-item">

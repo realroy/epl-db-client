@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import store from '../store'
+
 import {
+  AdminPage,
   ClubPage,
   ClubDetail,
-  DashboardPage,
+  Dashboard,
   FixturePage,
   HomePage,
   LoginPage,
@@ -17,6 +20,18 @@ import {
 import { PlayerTable, ClubOverview, FixtureTable, ClubStats } from '@/components'
 
 Vue.use(Router)
+
+const redirectToDashBoard = (to, from, next) => {
+  if (store.state.validAuth) {
+    next('admin/dashboard')
+  } else {
+    next()
+  }
+}
+
+const verifyAuth = (to, from, next) => {
+  store.state.validAuth ? next() : next('/admin/login')
+}
 
 export default new Router({
   mode: 'history',
@@ -65,17 +80,25 @@ export default new Router({
       children: [
         { path: 'overview', component: ClubOverview },
         { path: 'squad', component: PlayerTable },
-        { path: 'fixtures', component: FixtureTable, props: {} },
+        {
+          beforeEnter: (to, from, next) => {
+            console.log(this)
+          },
+          path: 'fixtures',
+          component: FixtureTable,
+          props: {}
+        },
         { path: 'results', component: PlayerTable },
         { path: 'stats', component: ClubStats }
       ]
     },
     {
       path: '/admin',
-      name: 'Login',
-      component: LoginPage,
+      name: 'Admin',
+      component: AdminPage,
       children: [
-        { path: 'dashboard', component: DashboardPage }
+        { beforeEnter: redirectToDashBoard, name: 'Admin Login', path: 'login', component: LoginPage },
+        { beforeEnter: verifyAuth, name: 'Admin DashBoard', path: 'dashboard', component: Dashboard }
       ]
     }
   ]
