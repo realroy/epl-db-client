@@ -26,7 +26,7 @@
         }
       },
       body: {
-        type: Function,
+        type: Array,
         required: true
       }
     }
