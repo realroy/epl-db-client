@@ -9,6 +9,7 @@ import ManagerPage from './Managers'
 import PlayerDetail from './PlayerDetail'
 import PlayerPage from './Players'
 import ResultPage from './Results'
+import TablePage from './Table'
 
 export {
   AdminPage,
@@ -21,5 +22,6 @@ export {
   ManagerPage,
   PlayerDetail,
   PlayerPage,
-  ResultPage
+  ResultPage,
+  TablePage
 }

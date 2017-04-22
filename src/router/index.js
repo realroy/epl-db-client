@@ -14,7 +14,8 @@ import {
   ManagerPage,
   PlayerDetail,
   PlayerPage,
-  ResultPage
+  ResultPage,
+  TablePage
 } from '@/pages'
 
 import { PlayerTable, ClubOverview, FixtureTable, ClubStats } from '@/components'
@@ -66,6 +67,11 @@ export default new Router({
       path: '/results',
       name: 'Results',
       component: ResultPage
+    },
+    {
+      path: '/tables',
+      name: 'Table',
+      component: TablePage
     },
     {
       path: '/player/:id/',
