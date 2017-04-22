@@ -3,17 +3,8 @@
     <hero></hero>
     <div class="container is-multiline is-mobile">
       <br>
-      <div v-for="(d, i) in dateList">
-        <div class="level">
-          <div class="level-left">
-            <div class="level-item">
-              <strong class="title">{{ d }}</strong>
-            </div>
-          </div>
-        </div>
-        <custom-table :head="head" :body="body(d)"></custom-table>
+      <fixture-table :isInfinite="true" :info="fixtures" :head="head" :body="body"></fixture-table>
       </div>
-
     </div>
   </div>
 </template>
@@ -22,27 +13,21 @@
   import { mapState, mapActions } from 'vuex'
   import CustomTable from '@/components/CustomTable'
   import Hero from '../components/Hero'
+  import FixtureTable from '../components/FixtureTable.vue'
   export default {
     created () {
       this.getFixtures()
     },
     components: {
       CustomTable,
+      FixtureTable,
       Hero
     },
     computed: {
       ...mapState({
         fixtures: state => state.fixtures.fixtures,
         clubs: state => state.clubs.clubs
-      }),
-      dateList () {
-        const dateList = {}
-        this.fixtures.forEach(f => {
-          const key = new Date(f.date).toDateString()
-          dateList[key] = key
-        })
-        return Object.keys(dateList)
-      }
+      })
     },
     data () {
       return {

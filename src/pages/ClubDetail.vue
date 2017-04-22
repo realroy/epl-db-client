@@ -32,10 +32,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import Sidebox from '../components/SideBox'
-import ClubFixture from '../components/ClubFixture'
-import ClubSquad from '../components/ClubSquad'
-import CustomLevel from '../components/CustomLevel'
 import DetailHero from '../components/DetailHero'
 export default {
   created () {
@@ -48,11 +44,7 @@ export default {
     this.$router.push(`/club/${id}/overview`)
   },
   components: {
-    ClubFixture,
-    ClubSquad,
-    CustomLevel,
-    DetailHero,
-    Sidebox
+    DetailHero
   },
   computed: {
     ...mapState({
