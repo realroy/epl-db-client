@@ -8,6 +8,7 @@ import LoginPage from './Login'
 import ManagerPage from './Managers'
 import PlayerDetail from './PlayerDetail'
 import PlayerPage from './Players'
+import ResultDetailPage from './ResultDetail.vue'
 import ResultPage from './Results'
 import TablePage from './Table'
 
@@ -22,6 +23,7 @@ export {
   ManagerPage,
   PlayerDetail,
   PlayerPage,
+  ResultDetailPage,
   ResultPage,
   TablePage
 }

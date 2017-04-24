@@ -8,7 +8,7 @@
           </h1>
           <h2 class="subtitle">
             <div v-for="s in subtitles">
-              <strong>{{ s.name }}: </strong>
+              <strong v-if="s.name !== undefined">{{ s.name }}: </strong>
               <a v-if="s.hasLink"
               :href="s.value"> {{ s.value }}</a>
               <span v-else>{{ s.value }}</span>

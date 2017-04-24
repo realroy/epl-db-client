@@ -7,7 +7,7 @@
   </thead>
   <tbody>
     <tr v-for="(b, i) in body" :key="i">
-      <td v-for="each in b">
+      <td v-for="each in b" @click="onClick(each.id)">
         <router-link v-if="each.link !== undefined" :to="each.link">{{ each.value }}</router-link>
         <span v-else-if="each.hasTag" class="tag is-danger">{{ each.value }}</span>
         <span v-else>{{ each.value }}</span>
@@ -29,6 +29,12 @@
       body: {
         type: Array,
         required: true
+      },
+      onClick: {
+        type: Function,
+        default () {
+          return () => {}
+        }
       }
     }
   }

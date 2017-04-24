@@ -3,7 +3,7 @@
     <hero></hero>
     <div class="container is-multiline is-mobile">
       <br>
-      <fixture-table :isInfinite="true" :info="fixtures" :head="head"></fixture-table>
+      <fixture-table :onClick="goToResultDetail" :isInfinite="true" :info="fixtures" :head="head"></fixture-table>
       </div>
     </div>
   </div>
@@ -35,7 +35,10 @@
       }
     },
     methods: {
-      ...mapActions(['getFixtures, clearFixtures', 'resetFixturePage', 'clearFixtureFilter'])
+      ...mapActions(['getFixtures, clearFixtures', 'resetFixturePage', 'clearFixtureFilter']),
+      goToResultDetail (id) {
+        this.$router.push(`/result/${id}`)
+      }
     }
   }
 </script>
