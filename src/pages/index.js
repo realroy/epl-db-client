@@ -1,6 +1,7 @@
 import AdminPage from './Admin'
 import ClubPage from './Clubs'
 import ClubDetail from './ClubDetail'
+import ContentManager from './ContentManager'
 import Dashboard from './Dashboard'
 import FixturePage from './Fixtures'
 import HomePage from './Home'
@@ -16,6 +17,7 @@ export {
   AdminPage,
   ClubPage,
   ClubDetail,
+  ContentManager,
   Dashboard,
   FixturePage,
   HomePage,

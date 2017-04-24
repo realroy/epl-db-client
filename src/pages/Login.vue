@@ -59,7 +59,7 @@
           await this.verifyAuthRequest({ username: this.username, password: this.password })
           if (this.$store.state.validAuth) {
             this.notValid = false
-            this.$router.push('admin/dashboard')
+            this.$router.push('/admin/dashboard')
           } else {
             this.notValid = true
           }

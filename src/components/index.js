@@ -4,6 +4,7 @@ import ClubSquad from './ClubSquad'
 import ClubStats from './ClubStats'
 import CustomLevel from './CustomLevel'
 import CustomTable from './CustomTable'
+import DashboardCard from './DashboardCard.vue'
 import DetailHero from './DetailHero'
 import FilterBar from './FilterBar'
 import FixtureTable from './FixtureTable'
@@ -27,6 +28,7 @@ export {
   ClubStats,
   CustomLevel,
   CustomTable,
+  DashboardCard,
   DetailHero,
   FilterBar,
   FixtureTable,

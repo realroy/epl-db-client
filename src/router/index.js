@@ -7,6 +7,7 @@ import {
   AdminPage,
   ClubPage,
   ClubDetail,
+  ContentManager,
   Dashboard,
   FixturePage,
   HomePage,
@@ -116,7 +117,13 @@ export default new Router({
       component: AdminPage,
       children: [
         { beforeEnter: redirectToDashBoard, name: 'Admin Login', path: 'login', component: LoginPage },
-        { beforeEnter: verifyAuth, name: 'Admin DashBoard', path: 'dashboard', component: Dashboard }
+        { beforeEnter: verifyAuth, name: 'Admin Dashboard', path: 'dashboard', component: Dashboard },
+        { name: 'Fixtures Content Manager', path: 'fixtures', component: ContentManager },
+        { name: 'Results Content Manager', path: 'result', component: ContentManager },
+        { name: 'Clubs Content Manager', path: 'clubs', component: ContentManager },
+        { name: 'Players Content Manager', path: 'players', component: ContentManager },
+        { name: 'Manager Content Manager', path: 'managers', component: ContentManager },
+        { name: 'Referees Content Manager', path: 'referees', component: ContentManager }
       ]
     }
   ]
