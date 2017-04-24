@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="viewMore(info.name)">
+  <div class="card">
     <div class="card-image">
       <figure class="image">
           <img :src="'/static/managers/' + info.name +'.png'">
