@@ -1,6 +1,6 @@
 import months from './months'
 import days from './days'
-import { list } from './clubs'
+import clubs from './clubs'
 
 export default {
   name: 'Fixtures',
@@ -19,7 +19,7 @@ export default {
     {
       name: 'Filter by club',
       type: 'club_name',
-      data: list
+      data: clubs.list
     }
   ]
 }

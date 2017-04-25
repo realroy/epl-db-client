@@ -1,6 +1,10 @@
 <template>
   <div>
-    <hero></hero>
+    <detail-hero
+      :title="$route.name"
+      textAlign="has-text-left"
+      :subtitles="[{ name: '', value: 'Premier League 2016/17' }]">
+    </detail-hero>
     <br>
     <div class="container">
       <div class="columns is-multiline is-mobile">
@@ -16,15 +20,16 @@
 
 
 <script>
-  import ManagerCard from '../components/ManagerCard.vue'
-  import Hero from '../components/Hero'
   import { mapState } from 'vuex'
+
+  import { DetailHero, ManagerCard } from '@/components'
+
   export default {
     created () {
       this.$store.dispatch('getManagers')
     },
     components: {
-      Hero,
+      DetailHero,
       ManagerCard
     },
     computed: {

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <hero></hero>
+    <detail-hero
+      :title="$route.name"
+      textAlign="has-text-left"
+      :subtitles="[{ name: '', value: 'Premier League 2016/17' }]">
+    </detail-hero>
     <div class="container">
       <custom-table :head="head" :body="body"></custom-table>
     </div>
@@ -9,8 +13,8 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import CustomTable from '@/components/CustomTable'
-  import Hero from '@/components/Hero'
+
+  import { CustomTable, DetailHero } from '@/components'
 
   export default {
     created () {
@@ -18,7 +22,7 @@
     },
     components: {
       CustomTable,
-      Hero
+      DetailHero
     },
     computed: {
       ...mapState({

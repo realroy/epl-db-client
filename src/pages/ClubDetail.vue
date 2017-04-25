@@ -2,27 +2,26 @@
   <div>
     <detail-hero
       :title="club.name"
-      :hasImage="true"
-      :picUrl="'/static/club-badge/' + $router.currentRoute.params.id + '.svg'"
+      :imgUrl="`/static/club-badge/${club.id}.svg`"
       :subtitles="[
         {
           name: 'Stadium Name',
-          value: club.stadium_name},
+          value: club.stadium_name
+        },
         {
           name: 'Official Site',
-          hasLink: true,
           linkTo: club.official_site,
-          value: club.official_site,
+          value: club.official_site
         }
       ]"
-      :footerList="[
-        {name: 'Overview', path: `/club/${$router.currentRoute.params.id}/overview`},
-        {name: 'Squad', path: `/club/${$router.currentRoute.params.id}/squad`},
-        {name: 'Fixtures', path: `/club/${$router.currentRoute.params.id}/fixtures`},
-        {name: 'Results', path: `/club/${$router.currentRoute.params.id}/results`},
-        {name: 'Stats', path: `/club/${$router.currentRoute.params.id}/stats`}
-      ]"
-    ></detail-hero>
+      :footers="[
+        { name: 'Overview', path: `overview` },
+        { name: 'Squad', path: `squad` },
+        { name: 'Fixtures', path: `fixtures` },
+        { name: 'Results', path: `results` },
+        { name: 'Stats', path: `stats` }
+      ]">
+    </detail-hero>
     <br>
     <div class="container">
       <router-view></router-view>
@@ -31,17 +30,17 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import DetailHero from '../components/DetailHero'
 export default {
   created () {
-    const { id } = this.$router.currentRoute.params
+    const { id } = this.$route.params
     this.clearPlayers()
     this.clearPlayerFilter()
     this.getClubById(id)
-    this.updatePlayerFilter({name: 'club_id', value: id})
-    this.getPlayers({allPage: true})
-    this.$router.push(`/club/${id}/overview`)
+    this.updatePlayerFilter({ name: 'club_id', value: id })
+    this.getPlayers({ allPage: true })
+    this.$router.push('overview')
   },
   components: {
     DetailHero
@@ -50,6 +49,9 @@ export default {
     ...mapState({
       club: state => state.clubs.club
     })
+  },
+  data () {
+    return {}
   },
   methods: {
     ...mapActions([

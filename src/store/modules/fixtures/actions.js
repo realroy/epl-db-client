@@ -23,7 +23,7 @@ export default {
     }
   },
   updateFixtureFilter ({ commit, state }, { name, value }) {
-    state.filter[name] === undefined
+    value === ''
     ? commit('REMOVE_FIXTURE_FILTER', { name })
     : commit('UPDATE_FIXTURE_FILTER', { name, value })
   },

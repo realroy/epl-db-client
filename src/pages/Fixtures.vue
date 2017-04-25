@@ -1,14 +1,23 @@
 <template>
   <div>
-    <hero></hero>
+    <detail-hero
+      :title="$route.name"
+      textAlign="has-text-left"
+      :subtitles="[{ name: '', value: 'Premier League 2016/17' }]">
+    </detail-hero>
     <div class="container is-multiline is-mobile">
+      <br>
       <filter-bar
-        :name="'player'"
-        :filters="filterList"
+        :name="'fixture'"
+        :filters="filters"
         :onUpdate="onUpdate"
-        :onReset="onReset"
-      ></filter-bar>
-      <fixture-table :isInfinite="true" :info="fixtures" :head="head"></fixture-table>
+        :onReset="onReset">
+      </filter-bar>
+      <fixture-table
+        :isInfinite="true"
+        :info="fixtures"
+        :head="head">
+      </fixture-table>
       </div>
     </div>
   </div>
@@ -16,7 +25,10 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import { FixtureTable, Hero, FilterBar } from '@/components'
+
+  import fixturesModel from '../models/fixtures'
+  import { DetailHero, FilterBar, FixtureTable } from '@/components'
+
   export default {
     created () {
       this.clearFixtureFilter()
@@ -25,41 +37,37 @@
       this.$store.dispatch('getFixtures', { allPage: false })
     },
     components: {
+      DetailHero,
       FilterBar,
-      FixtureTable,
-      Hero
+      FixtureTable
     },
     computed: {
       ...mapState({
-        fixtures: state => state.fixtures.fixtures,
-        clubs: state => state.clubs.clubs
-      }),
-      filterList () {
-        return [
-          {
-            name: 'Filter By Club',
-            type: 'club_id',
-            data: this.clubs.map(({ name }) => name)
-          }
-        ]
-      }
+        fixtures: state => state.fixtures.fixtures
+      })
     },
     data () {
       return {
-        head: ['Home', 'Kick off', 'Away']
+        head: ['Home', 'Kick off', 'Away'],
+        filters: fixturesModel.filters
       }
     },
     methods: {
       ...mapActions(['updateFixturePage', 'getFixtures', 'updateFixtureFilter', 'clearFixtureFilter', 'clearFixtures', 'resetFixturePage']),
-      onUpdate ({name, value}) {
+      onUpdate ({ name, value }) {
+        this.resetFixturePage()
         this.clearFixtures()
-        this.updateFixtureFilter({ name, value })
+        if (name === 'club_id') {
+          this.updateFixtureFilter({ name: 'home_id', value })
+        } else {
+          this.updateFixtureFilter({ name, value })
+        }
         this.getFixtures({ allPage: false })
       },
       onReset () {
         this.resetFixturePage()
         this.clearFixtures()
-        this.clearFixturesFilter()
+        this.clearFixtureFilter()
         this.getFixtures({ allPage: false })
       }
     }
