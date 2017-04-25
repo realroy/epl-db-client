@@ -14,10 +14,9 @@
           v-model="selecteds[i]"
           :name="f.type"
           :data-index="i"
-          @change="updateSelect"
-        >
-          <option value="">{{ f.name }}</option>
-          <option v-for="(each, i) in f.data">{{ each }}</option>
+          @change="updateSelect">
+            <option value="">{{ f.name }}</option>
+            <option v-for="(each, i) in f.data">{{ each }}</option>
         </select>
       </span>
     </p>
@@ -44,11 +43,10 @@ export default {
       type: Array
     },
     onUpdate: {
-      required: true,
-      type: Function
+      type: Function,
+      default: () => {}
     },
     onReset: {
-      required: true,
       type: Function
     }
   },

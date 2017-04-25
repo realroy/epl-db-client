@@ -2,11 +2,13 @@ import ClubCard from './ClubCard'
 import ClubOverview from './ClubOverview'
 import ClubSquad from './ClubSquad'
 import ClubStats from './ClubStats'
+import ContentTable from './ContentTable.vue'
 import CustomLevel from './CustomLevel'
 import CustomTable from './CustomTable'
-import DashboardCard from './DashboardCard.vue'
+import DashboardCard from './DashboardCard'
 import DetailHero from './DetailHero'
 import FilterBar from './FilterBar'
+import FixtureBox from './FixtureBox'
 import FixtureTable from './FixtureTable'
 import Hero from './Hero'
 import ManagerCard from './ManagerCard'
@@ -26,11 +28,13 @@ export {
   ClubOverview,
   ClubSquad,
   ClubStats,
+  ContentTable,
   CustomLevel,
   CustomTable,
   DashboardCard,
   DetailHero,
   FilterBar,
+  FixtureBox,
   FixtureTable,
   Hero,
   ManagerCard,

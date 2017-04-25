@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { mapState } from 'vuex'
 
 import store from '../store'
 
@@ -21,6 +22,11 @@ import {
 } from '@/pages'
 
 import { PlayerTable, ClubOverview, FixtureTable, ClubStats, ResultLineUp, ResultOverview, ResultStats } from '@/components'
+
+import fixturesModel from '../models/fixtures'
+import clubsModel from '../models/clubs'
+import playersModel from '../models/players'
+import managerModel from '../models/managers'
 
 Vue.use(Router)
 
@@ -112,18 +118,151 @@ export default new Router({
       ]
     },
     {
+      beforeEnter (to, from, next) {
+        alert('Enter to admin zone')
+        next()
+      },
       path: '/admin',
       name: 'Admin',
       component: AdminPage,
       children: [
         { beforeEnter: redirectToDashBoard, name: 'Admin Login', path: 'login', component: LoginPage },
         { beforeEnter: verifyAuth, name: 'Admin Dashboard', path: 'dashboard', component: Dashboard },
-        { name: 'Fixtures Content Manager', path: 'fixtures', component: ContentManager },
-        { name: 'Results Content Manager', path: 'result', component: ContentManager },
-        { name: 'Clubs Content Manager', path: 'clubs', component: ContentManager },
-        { name: 'Players Content Manager', path: 'players', component: ContentManager },
-        { name: 'Manager Content Manager', path: 'managers', component: ContentManager },
-        { name: 'Referees Content Manager', path: 'referees', component: ContentManager }
+        {
+          name: 'Fixtures Content Manager',
+          path: 'fixtures',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.fixtures.fixtures
+            }),
+            attrs: fixturesModel.attrs,
+            name: 'Fixtures',
+            filters: fixturesModel.filters,
+            onCreate () {
+              store.dispatch('getFixtures', { allPage: false })
+            },
+            onUpdate ({ name, value }) {
+              store.dispatch('clearFixtures')
+              store.dispatch('updateFixturesFilter', { name, value })
+              store.dispatch('resetFixturesPage')
+              store.dispatch('getFixtures', { allPage: false })
+            },
+            onReset () {
+              store.dispatch('clearFixtures')
+              store.dispatch('clearFixtureFilter')
+              store.dispatch('resetFixturesPage')
+              store.dispatch('getFixtures', { allPage: false })
+            }
+          }
+        },
+        {
+          name: 'Results Content Manager',
+          path: 'results',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.fixtures.fixtures
+            }),
+            attrs: fixturesModel.attrs,
+            name: 'Fixtures',
+            filters: fixturesModel.filters,
+            onCreate () {
+              store.dispatch('getFixtures', { allPage: false })
+            },
+            onUpdate ({ name, value }) {
+              store.dispatch('clearFixtures')
+              store.dispatch('updateFixturesFilter', { name, value })
+              store.dispatch('resetFixturesPage')
+              store.dispatch('getFixtures', { allPage: false })
+            },
+            onReset () {
+              store.dispatch('clearFixtures')
+              store.dispatch('clearFixtureFilter')
+              store.dispatch('resetFixturesPage')
+              store.dispatch('getFixtures', { allPage: false })
+            }
+          }
+        },
+        {
+          name: 'Clubs Content Manager',
+          path: 'clubs',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.clubs.clubs
+            }),
+            attrs: clubsModel.attrs,
+            name: 'Clubs',
+            filters: [],
+            onCreate () {
+              store.dispatch('getAllClubs')
+            }
+          }
+        },
+        {
+          name: 'Players Content Manager',
+          path: 'players',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.players.players
+            }),
+            attrs: playersModel.attrs,
+            name: 'Players',
+            filters: playersModel.filters,
+            onCreate () {
+              store.dispatch('clearPlayerFilter')
+              store.dispatch('resetPlayerPage')
+              store.dispatch('clearPlayers')
+              store.dispatch('getPlayers', { allPage: false })
+            },
+            onUpdate ({ name, value }) {
+              store.dispatch('clearPlayers')
+              store.dispatch('updatePlayersFilter', { name, value })
+              store.dispatch('resetPlayerPage')
+              store.dispatch('getPlayers', { allPage: false })
+            },
+            onReset () {
+              store.dispatch('clearPlayers')
+              store.dispatch('clearPlayersFilter')
+              store.dispatch('resetPlayerPage')
+              store.dispatch('getPlayers', { allPage: false })
+            }
+          }
+        },
+        {
+          name: 'Manager Content Manager',
+          path: 'managers',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.managers
+            }),
+            attrs: managerModel.attrs,
+            name: managerModel.name,
+            onCreate () {
+              store.dispatch('getManagers')
+            },
+            onUpdate ({ name, value }) {},
+            onReset () {}
+          }
+        },
+        {
+          name: 'Referees Content Manager',
+          path: 'referees',
+          component: ContentManager,
+          props: {
+            ...mapState({
+              info: state => state.managers
+            }),
+            attrs: {},
+            name: 'Referees',
+            onCreate () {},
+            onUpdate ({ name, value }) {},
+            onReset () {}
+          }
+        }
       ]
     }
   ]

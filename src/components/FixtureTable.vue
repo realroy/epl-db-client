@@ -19,6 +19,7 @@
   import { mapActions } from 'vuex'
   import CustomTable from './CustomTable'
   export default {
+    name: 'fixture-table',
     components: {
       CustomTable,
       InfiniteLoading

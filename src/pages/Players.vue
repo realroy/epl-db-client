@@ -62,7 +62,6 @@ export default {
       this.clearPlayerFilter()
       this.getPlayers({ allPage: false })
     }
-
   }
 }
 </script>

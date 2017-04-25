@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="onClick">
     <div class="card-content">
       <div class="media">
         <div class="media-left">
@@ -23,7 +23,11 @@
   export default {
     props: {
       info: {
-        type: Array
+        type: Object
+      },
+      onClick: {
+        type: Function,
+        default: () => {}
       }
     }
   }

@@ -4,7 +4,7 @@ import nationality from './nationality'
 
 export default {
   name: 'Players',
-  attrs: ['id', 'number', 'club', 'position', 'nationality', 'dob', 'height', 'weight', 'img url'],
+  attrs: ['id', 'number', 'name', 'club_id', 'position', 'nationality', 'dob', 'height', 'weight', 'img url'],
   filters: [
     {
       name: 'Filter by position',
