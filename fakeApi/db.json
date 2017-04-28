@@ -1,5 +1,6 @@
 {
-  "clubs": [{
+  "clubs": [
+    {
       "id": 1,
       "name": "AFC Bournemouth",
       "stadium_name": "Vitality Stadium",
@@ -138,9 +139,17 @@
       "stadium_name": "London Stadium",
       "official_site": "http://www.whufc.com",
       "manager_id": 16
+    },
+    {
+      "id": "21",
+      "name": "Real Madrid",
+      "stadium_name": "Don't know",
+      "official_site": "Don't know",
+      "manager_id": "-99"
     }
   ],
-  "fixtures": [{
+  "fixtures": [
+    {
       "id": 1,
       "date": 1471186800000,
       "home_id": 2,
@@ -2421,7 +2430,8 @@
       "away_id": 10
     }
   ],
-  "managers": [{
+  "managers": [
+    {
       "id": 1,
       "name": "Eddie Howe",
       "country_of_birth": "England",
@@ -2542,7 +2552,8 @@
       "dob": "09/11/1965"
     }
   ],
-  "players": [{
+  "players": [
+    {
       "id": 1,
       "number": 13,
       "name": "David Ospina",

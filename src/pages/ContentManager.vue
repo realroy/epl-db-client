@@ -21,9 +21,6 @@
           <div class="panel-block">
             <button class="button is-danger is-fullwidth">Delete</button>
           </div>
-          <div class="panel-block">
-            <button class="button is-primary is-fullwidth">Copy</button>
-          </div>
         </nav>
       </div>
       <div class="column">
@@ -31,7 +28,11 @@
           <br>
           <filter-bar v-if="filters.length > 0" :name="name" :filters="filters" :onUpdate="onUpdate" :onReset="onReset"></filter-bar>
           <br>
-          <content-table :name="name" :attrs="attrs" :info="info()">
+          <content-table
+            :name="name"
+            :attrs="attrs"
+            :info="info()"
+          >
           </content-table>
         </div>
       </div>

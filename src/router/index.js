@@ -27,6 +27,7 @@ import fixturesModel from '../models/fixtures'
 import clubsModel from '../models/clubs'
 import playersModel from '../models/players'
 import managerModel from '../models/managers'
+import refereesModel from '../models/referees'
 
 Vue.use(Router)
 
@@ -107,11 +108,18 @@ export default new Router({
         { path: 'squad', component: PlayerTable },
         {
           beforeEnter: (to, from, next) => {
-            console.log(this)
+            store.dispatch('clearFixtures')
+            store.dispatch('clearFixtureFilter')
+            store.dispatch('updateFixtureFilter', { name: 'club_id', value: to.params.id })
+            store.dispatch('getFixtures', { allPage: true })
+            next()
           },
           path: 'fixtures',
           component: FixtureTable,
-          props: {}
+          props: {
+            info: store.state.fixtures.fixtures,
+            head: fixturesModel.attrs
+          }
         },
         { path: 'results', component: PlayerTable },
         { path: 'stats', component: ClubStats }
@@ -256,8 +264,8 @@ export default new Router({
             ...mapState({
               info: state => state.managers
             }),
-            attrs: {},
-            name: 'Referees',
+            attrs: refereesModel.attrs,
+            name: refereesModel.name,
             onCreate () {},
             onUpdate ({ name, value }) {},
             onReset () {}

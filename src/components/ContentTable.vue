@@ -10,9 +10,9 @@
       <tbody>
         <tr v-for="(rows, index) in info">
           <td>
-            <input type="checkbox">
+            <input type="checkbox" v-model="selecteds[index]">
           </td>
-          <td v-for="cols in rows" @click="onClick(index)">
+          <td v-for="cols in rows" @click="onClick(rows.id)">
             {{ cols }}
           </td>
         </tr>
@@ -48,11 +48,11 @@
   </div>
 </template>
 
-
 <script>
   export default {
     data () {
       return {
+        selecteds: new Array(this.info.length).fill(false),
         id: 0,
         modalActive: false
       }
@@ -64,6 +64,18 @@
       },
       onClose () {
         this.modalActive = false
+      },
+      onSelect (id) {
+        this.selecteds[id] = true
+        this.whenSelect(this.selecteds)
+      },
+      onUnselect (id) {
+        this.selecteds[id] = false
+        this.whenSelect(this.selecteds)
+      },
+      onSelectAll () {
+        this.selecteds = this.selecteds.fill(true)
+        this.whenSelect(this.selecteds)
       }
     },
     props: {
