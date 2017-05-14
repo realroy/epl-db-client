@@ -7,17 +7,10 @@
     </detail-hero>
     <div class="container is-multiline is-mobile">
       <br>
-      <filter-bar
-        :name="'result'"
-        :filters="filters"
-        :onUpdate="onUpdate"
-        :onReset="onReset">
-      </filter-bar>
       <fixture-table
         :onClick="goToResultDetail"
-        :isInfinite="true"
         :info="fixtures"
-        :head="head">
+        :attrs="attrs">
       </fixture-table>
       </div>
     </div>
@@ -25,55 +18,33 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-
-  import fixtureModel from '../models/fixtures.js'
-  import { DetailHero, FilterBar, FixtureTable } from '@/components'
-  export default {
-    created () {
-      this.clearFixtureFilter()
-      this.resetFixturePage()
-      this.$store.dispatch('clearFixtures')
-      this.$store.dispatch('getFixtures', { allPage: false })
+import { resultEnum } from '../enums'
+import {
+  DetailHero,
+  FilterBar,
+  FixtureTable
+} from '@/components'
+export default {
+  async created () {
+  },
+  components: {
+    DetailHero,
+    FilterBar,
+    FixtureTable
+  },
+  data () {
+    return {
+      attrs: resultEnum.shortAttrs
+    }
+  },
+  methods: {
+    onUpdate ({ name, value }) {
     },
-    components: {
-      DetailHero,
-      FilterBar,
-      FixtureTable
+    onReset () {
     },
-    computed: {
-      ...mapState({
-        fixtures: state => state.fixtures.fixtures
-      })
-    },
-    data () {
-      return {
-        head: ['Home', 'Score', 'Away'],
-        filters: fixtureModel.filters
-      }
-    },
-    methods: {
-      ...mapActions(['updateFixturePage', 'getFixtures', 'updateFixtureFilter', 'clearFixtureFilter', 'clearFixtures', 'resetFixturePage']),
-      onUpdate ({ name, value }) {
-        this.resetFixturePage()
-        this.clearFixtures()
-        if (name === 'club_id') {
-          this.updateFixtureFilter({ name: 'home_id', value })
-        } else {
-          this.updateFixtureFilter({ name, value })
-        }
-        this.getFixtures({ allPage: false })
-      },
-      onReset () {
-        this.resetFixturePage()
-        this.clearFixtures()
-        this.clearFixtureFilter()
-        this.getFixtures({ allPage: false })
-      },
-      goToResultDetail (id) {
-        this.$router.push(`/result/${id}`)
-      }
+    goToResultDetail (id) {
+      this.$router.push(`/result/${id}`)
     }
   }
-
+}
 </script>

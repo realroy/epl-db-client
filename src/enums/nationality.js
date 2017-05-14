@@ -1,4 +1,5 @@
-export default ['Colombia',
+module.exports = [
+  'Colombia',
   'Czech Republic',
   'Argentina',
   'France',

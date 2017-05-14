@@ -1,10 +1,4 @@
 export default {
-  GET_RANKING (store, data) {
-    store.ranking = data
-  },
-  GET_MANAGERS (store, data) {
-    store.managers = data
-  },
   VALID_AUTH (store) {
     store.validAuth = true
   },
@@ -14,5 +8,7 @@ export default {
   LOGOUT_SUCCESSFULLY (store) {
     store.validAuth = false
   },
-  LOGOUT_FAIL (store) {}
+  LOGOUT_FAIL (store) {
+    store.validAuth = true
+  }
 }

@@ -1,31 +1,14 @@
-import AdminPage from './Admin'
-import ClubPage from './Clubs'
-import ClubDetail from './ClubDetail'
-import ContentManager from './ContentManager'
-import Dashboard from './Dashboard'
-import FixturePage from './Fixtures'
-import HomePage from './Home'
-import LoginPage from './Login'
-import ManagerPage from './Managers'
-import PlayerDetail from './PlayerDetail'
-import PlayerPage from './Players'
-import ResultDetailPage from './ResultDetail.vue'
-import ResultPage from './Results'
-import TablePage from './Table'
-
-export {
-  AdminPage,
-  ClubPage,
-  ClubDetail,
-  ContentManager,
-  Dashboard,
-  FixturePage,
-  HomePage,
-  LoginPage,
-  ManagerPage,
-  PlayerDetail,
-  PlayerPage,
-  ResultDetailPage,
-  ResultPage,
-  TablePage
-}
+export const AdminPage = require('./Admin.vue')
+export const ClubPage = require('./Clubs.vue')
+export const ClubDetail = require('./ClubDetail.vue')
+export const ContentManager = require('./ContentManager.vue')
+export const Dashboard = require('./Dashboard.vue')
+export const FixturePage = require('./Fixtures.vue')
+export const HomePage = require('./Home.vue')
+export const LoginPage = require('./Login.vue')
+export const ManagerPage = require('./Managers.vue')
+export const PlayerDetail = require('./PlayerDetail.vue')
+export const PlayerPage = require('./Players.vue')
+export const ResultDetailPage = require('./ResultDetail.vue')
+export const ResultPage = require('./Results.vue')
+export const TablePage = require('./Table.vue')

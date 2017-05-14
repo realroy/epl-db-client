@@ -24,52 +24,32 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { shortAttrs, filters } from '../enums/fixtures.js'
+import {
+  DetailHero,
+  FilterBar,
+  FixtureTable
+} from '@/components'
 
-  import fixturesModel from '../models/fixtures'
-  import { DetailHero, FilterBar, FixtureTable } from '@/components'
-
-  export default {
-    created () {
-      this.clearFixtureFilter()
-      this.resetFixturePage()
-      this.$store.dispatch('clearFixtures')
-      this.$store.dispatch('getFixtures', { allPage: false })
+export default {
+  async created () {
+  },
+  components: {
+    DetailHero,
+    FilterBar,
+    FixtureTable
+  },
+  data () {
+    return {
+      attrs: shortAttrs,
+      filters
+    }
+  },
+  methods: {
+    onUpdate ({ name, value }) {
     },
-    components: {
-      DetailHero,
-      FilterBar,
-      FixtureTable
-    },
-    computed: {
-      ...mapState({
-        fixtures: state => state.fixtures.fixtures
-      })
-    },
-    data () {
-      return {
-        head: ['Home', 'Kick off', 'Away'],
-        filters: fixturesModel.filters
-      }
-    },
-    methods: {
-      ...mapActions(['updateFixturePage', 'getFixtures', 'updateFixtureFilter', 'clearFixtureFilter', 'clearFixtures', 'resetFixturePage']),
-      onUpdate ({ name, value }) {
-        this.resetFixturePage()
-        this.clearFixtures()
-        if (name === 'club_id') {
-          this.updateFixtureFilter({ name: 'home_id', value })
-        } else {
-          this.updateFixtureFilter({ name, value })
-        }
-        this.getFixtures({ allPage: false })
-      },
-      onReset () {
-        this.resetFixturePage()
-        this.clearFixtures()
-        this.clearFixtureFilter()
-        this.getFixtures({ allPage: false })
-      }
+    onReset () {
     }
   }
+}
 </script>

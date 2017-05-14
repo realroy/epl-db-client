@@ -1,51 +1,25 @@
-import ClubCard from './ClubCard'
-import ClubOverview from './ClubOverview'
-import ClubSquad from './ClubSquad'
-import ClubStats from './ClubStats'
-import ContentTable from './ContentTable.vue'
-import CustomLevel from './CustomLevel'
-import CustomTable from './CustomTable'
-import DashboardCard from './DashboardCard'
-import DetailHero from './DetailHero'
-import FilterBar from './FilterBar'
-import FixtureBox from './FixtureBox'
-import FixtureTable from './FixtureTable'
-import Hero from './Hero'
-import ManagerCard from './ManagerCard'
-import Navbar from './Navbar'
-import PlayerBox from './PlayerBox.vue'
-import PlayerCard from './PlayerCard'
-import PlayerHero from './PlayerHero'
-import PlayerTable from './PlayerTable'
-import ResultHero from './ResultHero'
-import ResultLineUp from './ResultLineUp'
-import ResultOverview from './ResultOverview'
-import ResultStats from './ResultStats'
-import SideBox from './SideBox'
 
-export {
-  ClubCard,
-  ClubOverview,
-  ClubSquad,
-  ClubStats,
-  ContentTable,
-  CustomLevel,
-  CustomTable,
-  DashboardCard,
-  DetailHero,
-  FilterBar,
-  FixtureBox,
-  FixtureTable,
-  Hero,
-  ManagerCard,
-  Navbar,
-  PlayerBox,
-  PlayerCard,
-  PlayerHero,
-  PlayerTable,
-  ResultHero,
-  ResultLineUp,
-  ResultOverview,
-  ResultStats,
-  SideBox
-}
+export const Card = require('./Card.vue')
+export const ClubCard = require('./ClubCard.vue')
+export const ClubOverview = require('./ClubOverview.vue')
+export const ClubSquad = require('./ClubSquad.vue')
+export const ClubStats = require('./ClubStats.vue')
+export const ContentTable = require('./ContentTable.vue')
+export const CustomLevel = require('./CustomTable.vue')
+export const CustomTable = require('./ContentTable.vue')
+export const DashboardCard = require('./DashboardCard.vue')
+export const DetailHero = require('./DetailHero.vue')
+export const FilterBar = require('./FilterBar.vue')
+export const FixtureTable = require('./FixtureTable.vue')
+export const Hero = require('./Hero.vue')
+export const ManagerCard = require('./ManagerCard.vue')
+export const Navbar = require('./Navbar.vue')
+export const PlayerBox = require('./PlayerBox.vue')
+export const PlayerCard = require('./PlayerCard.vue')
+export const PlayerHero = require('./PlayerHero.vue')
+export const PlayerTable = require('./PlayerTable.vue')
+export const ResultHero = require('./ResultHero.vue')
+export const ResultLineUp = require('./ResultLineUp.vue')
+export const ResultOverview = require('./ResultOverview.vue')
+export const ResultStats = require('./ResultStats.vue')
+export const SideBox = require('./SideBox.vue')

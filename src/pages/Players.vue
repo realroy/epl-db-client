@@ -11,8 +11,8 @@
         :name="'player'"
         :filters="filters"
         :onUpdate="onUpdate"
-        :onReset="onReset"
-      ></filter-bar>
+        :onReset="onReset">
+      </filter-bar>
       <br>
       <player-table :isInfinite="true" :players="players"></player-table>
       <br>
@@ -21,46 +21,26 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 import { FilterBar, DetailHero, PlayerTable } from '@/components'
-import playersModel from '../models/players'
+import { filters } from '../enums/fixtures'
 
 export default {
   created () {
-    this.resetPlayerPage()
-    this.clearPlayers()
-    this.clearPlayerFilter()
   },
   components: {
     FilterBar,
     DetailHero,
     PlayerTable
   },
-  computed: {
-    ...mapState({
-      players: state => state.players.players,
-      clubs: state => state.clubs.clubs
-    })
-  },
   data () {
     return {
-      filters: playersModel.filters
+      filters
     }
   },
   methods: {
-    ...mapActions(['updatePlayerPage', 'getPlayers', 'updatePlayerFilter', 'clearPlayerFilter', 'clearPlayers', 'resetPlayerPage']),
     onUpdate ({ name, value }) {
-      this.resetPlayerPage()
-      this.clearPlayers()
-      this.updatePlayerFilter({ name, value })
-      this.getPlayers({ allPage: false })
     },
     onReset () {
-      this.resetPlayerPage()
-      this.clearPlayers()
-      this.clearPlayerFilter()
-      this.getPlayers({ allPage: false })
     }
   }
 }

@@ -2,15 +2,15 @@
   <table class="table">
   <thead>
     <tr>
-      <th v-for="h in head" class="has-text-centered"> {{ h }} </th>
+      <th v-for="(attr, index) in attrs" class="has-text-centered" :key="index"> {{ attr }} </th>
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(b, i) in body" :key="i">
-      <td v-for="each in b" @click="onClick(each.id)">
-        <router-link v-if="each.link !== undefined" :to="each.link">{{ each.value }}</router-link>
-        <span v-else-if="each.hasTag" class="tag is-danger">{{ each.value }}</span>
-        <span v-else>{{ each.value }}</span>
+    <tr v-for="(rows, rowIndex) in info" :key="rowIndex">
+      <td v-for="(columns, columnIndex) in rows" @click="onClick(columns.id)">
+        <router-link v-if="columns.link" :to="columns.link">{{ columns.value }}</router-link>
+        <span v-else-if="columns.hasTag" class="tag is-danger">{{ columns.value }}</span>
+        <span v-else>{{ columns.value }}</span>
       </td>
     </tr>
   </tbody>
@@ -19,21 +19,24 @@
 <script>
   export default {
     props: {
-      head: {
+      attrs: {
         type: Array,
         required: true,
         default () {
           return []
         }
       },
-      body: {
+      info: {
         type: Array,
-        required: true
+        required: true,
+        default () {
+          return []
+        }
       },
       onClick: {
         type: Function,
         default () {
-          return () => {}
+          return (id) => {}
         }
       }
     }

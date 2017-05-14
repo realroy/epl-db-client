@@ -8,22 +8,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Navbar from './components/Navbar'
-
+import { Navbar } from './components'
 export default {
-  created () {
-    this.getAllClubs()
-    this.getManagers()
-    this.getPlayers({ allPage: false })
-  },
   name: 'app',
-  components: {
-    Navbar
-  },
-  methods: {
-    ...mapActions(['getAllClubs', 'getManagers', 'getPlayers'])
-  }
+  components: { Navbar }
 }
 </script>
 
