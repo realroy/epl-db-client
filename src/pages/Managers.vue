@@ -20,22 +20,14 @@
 
 
 <script>
-  import { mapState } from 'vuex'
+import { DetailHero, ManagerCard } from '@/components'
 
-  import { DetailHero, ManagerCard } from '@/components'
-
-  export default {
-    created () {
-      this.$store.dispatch('getManagers')
-    },
-    components: {
-      DetailHero,
-      ManagerCard
-    },
-    computed: {
-      ...mapState({
-        managers: state => state.managers
-      })
-    }
-  }
+export default {
+  created () {
+  },
+  components: {
+    DetailHero,
+    ManagerCard
+  },
+}
 </script>

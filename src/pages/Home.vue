@@ -8,7 +8,10 @@
     <div class="columns">
       <div class="column is-3">
         <br>
-        <custom-table :attrs="table.attrs" :info="table.info"></custom-table>
+        <custom-table
+          :attrs="table.attrs"
+          :info="table.info">
+        </custom-table>
       </div>
       <div class="column">
         <div class="column">
@@ -23,6 +26,7 @@
 <script>
 import { tableEnum } from '../enums'
 import { CustomTable, DetailHero } from '../components'
+const attrs = tableEnum.shortAttrs
 export default {
   async created () {
   },
@@ -33,7 +37,7 @@ export default {
   data () {
     return {
       table: {
-        attrs: tableEnum.shortAttrs,
+        attrs,
         info: []
       }
     }

@@ -1,39 +1,29 @@
 <template>
   <div class="container">
     <br>
-    <div class="columns has-text-centered">
-      <div class="column ">
-        0
-      </div>
-      <div class="column">
-        Possession %
-      </div>
-      <div class="column">
-        0
-      </div>
-    </div>
-    <div class="columns has-text-centered">
-      <div class="column ">
-        0
-      </div>
-      <div class="column">
-        Shots on target
-      </div>
-      <div class="column">
-        0
+    <div
+      v-for="(stat, statIndex) in stats"
+      :key="statIndex"
+      class="columns has-text-centered">
+      <div
+        v-for="(each, eachIndex) in stat"
+        :key="eachIndex"
+        class="column">
+        {{ each || '' }}
       </div>
     </div>
-    <div class="columns has-text-centered">
-      <div class="column ">
-        0
-      </div>
-      <div class="column">
-        Shots
-      </div>
-      <div class="column">
-        0
-      </div>
-    </div>
-
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    stats: {
+      type: Array,
+      required: true,
+      default: () => []
+    }
+  }
+}
+</script>
+

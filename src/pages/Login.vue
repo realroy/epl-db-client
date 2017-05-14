@@ -8,7 +8,7 @@
           <label class="label">Username</label>
           <p class="control">
             <input
-              v-bind:class="{'is-danger': notValid}"
+              v-bind:class="{'is-danger': !isValid}"
               v-model="username"
               type="text"
               class="input"
@@ -19,13 +19,13 @@
           <label class="label">Password</label>
             <p class="control">
               <input
-                v-bind:class="{'is-danger': notValid}"
+                v-bind:class="{'is-danger': !isValid}"
                 v-model="password"
                 type="password"
                 class="input"
                 placeholder="Enter your password">
             </p>
-            <p class="help is-danger" v-show="notValid">Invalid username or password</p>
+            <p class="help is-danger" v-show="!isValid">Invalid username or password</p>
         </div>
         <p class="control">
           <button class="button is-primary">Login</button>
@@ -36,35 +36,25 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import DetailHero from '../components/DetailHero'
-  export default {
-    components: {
-      DetailHero
-    },
-    data () {
-      return {
-        username: '',
-        password: '',
-        notValid: false
-      }
-    },
-    methods: {
-      ...mapActions(['verifyAuthRequest']),
-      isFormComplete () {
-        this.notValid = this.username === '' && this.password === ''
-      },
-      async onSubmit () {
-        if (!this.notValid) {
-          await this.verifyAuthRequest({ username: this.username, password: this.password })
-          if (this.$store.state.validAuth) {
-            this.notValid = false
-            this.$router.push('/admin/dashboard')
-          } else {
-            this.notValid = true
-          }
-        }
-      }
+import { DetailHero } from '../components'
+export default {
+  components: {
+    DetailHero
+  },
+  data () {
+    return {
+      username: '',
+      password: '',
+      isValid: true
+    }
+  },
+  methods: {
+    onSubmit () {
+      const payload = { username: this.username, password: this.password }
+      this.$store.dispatch.verifyAuth(payload)
+      if (this.$store.state.validAuth) this.$router.push('/admin/dashboard')
+      else this.isValid = false
     }
   }
+}
 </script>

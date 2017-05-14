@@ -8,15 +8,15 @@
         @input="updateText"
       >
     </p>-->
-    <p class="control" v-for="(f, i) in filters" :key="i">
+    <p class="control" v-for="(filter, index) in filters" :key="index">
       <span class="select">
         <select
-          v-model="selecteds[i]"
-          :name="f.type"
-          :data-index="i"
+          v-model="selecteds[index]"
+          :name="filter.type"
+          :data-index="index"
           @change="updateSelect">
-            <option value="">{{ f.name }}</option>
-            <option v-for="(each, i) in f.data">{{ each }}</option>
+            <option value="">{{ filter.name }}</option>
+            <option v-for="(data, dataIndex) in filter.data" :key="dataIndex">{{ data }}</option>
         </select>
       </span>
     </p>
@@ -47,16 +47,17 @@ export default {
       default: () => {}
     },
     onReset: {
-      type: Function
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
-    updateText (e) {
-      this.onUpdate({
-        name: 'textField',
-        value: e.target.value.trim()
-      })
-    },
+    // updateText (e) {
+    //   this.onUpdate({
+    //     name: 'textField',
+    //     value: e.target.value.trim()
+    //   })
+    // },
     updateSelect (e) {
       console.log(e.srcElement.dataset.index)
       if (e.target.name === 'club_name') {

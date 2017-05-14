@@ -41,24 +41,21 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import Sidebox from '../components/SideBox'
-import CustomLevel from '../components/CustomLevel'
-import PlayerHero from '../components/PlayerHero'
+import {
+  CustomCard,
+  CustomLevel,
+  PlayerHero
+} from '../components'
 export default {
   created () {
-    const { id } = this.$router.currentRoute.params
-    this.getPlayerById(id)
+    // const { id } = this.$router.currentRoute.params
   },
   components: {
     CustomLevel,
     PlayerHero,
-    Sidebox
+    CustomCard
   },
   computed: {
-    ...mapState({
-      player: state => state.players.player
-    }),
     overview: () => ({
       name: 'Overview',
       info: [
@@ -106,9 +103,6 @@ export default {
         {name: 'Offsides', value: 0}
       ]
     })
-  },
-  methods: {
-    ...mapActions(['getPlayerById'])
   }
 }
 </script>

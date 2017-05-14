@@ -3,21 +3,19 @@
     <detail-hero :title="'Dashboard'" :subtitles="[{name: '' , value: 'Welcome to EPL dashboard'}]"></detail-hero>
     <div class="container">
       <br>
-      <div class="notification is-danger">
+      <!--<div class="notification is-danger">
         <h1 class="title">Start live commentary</h1>
         <br>
-        <button class="button is-danger is-inverted is-outlined">Live now!</button>
+        <button class="button is-danger is-inverted is-outlined">Live now!</button>-->
       </div>
       <div class="columns is-multiline is-mobile">
-        <div class="column is-6-desktop" v-for="each in cards">
-          <dashboard-card :info="each" :onClick="() => $router.push(each.link)"></dashboard-card>
+        <div class="column is-6-desktop" v-for="card in cards">
+          <dashboard-card :info="card" :onClick="() => $router.push(card.link)"></dashboard-card>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
 
 <script>
   import { DetailHero, DashboardCard } from '@/components'

@@ -30,41 +30,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import DetailHero from '../components/DetailHero'
+import { DetailHero } from '../components'
 export default {
   created () {
-    const { id } = this.$route.params
-    this.clearPlayers()
-    this.clearPlayerFilter()
-    this.getClubById(id)
-    this.updatePlayerFilter({ name: 'club_id', value: id })
-    this.getPlayers({ allPage: true })
-    this.$router.push('overview')
   },
   components: {
     DetailHero
-  },
-  computed: {
-    ...mapState({
-      club: state => state.clubs.club
-    })
-  },
-  data () {
-    return {}
-  },
-  methods: {
-    ...mapActions([
-      'getClubById',
-      'getFixtures',
-      'updatePlayerFilter',
-      'updateFixtureFilter',
-      'getPlayers',
-      'clearPlayerFilter',
-      'clearFixtureFilter',
-      'clearPlayers',
-      'clearFixtureFilter'
-    ])
   }
 }
 </script>

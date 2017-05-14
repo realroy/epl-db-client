@@ -14,9 +14,8 @@
         :onReset="onReset">
       </filter-bar>
       <fixture-table
-        :isInfinite="true"
         :info="fixtures"
-        :head="head">
+        :attrs="attrs">
       </fixture-table>
       </div>
     </div>
@@ -24,7 +23,8 @@
 </template>
 
 <script>
-import { shortAttrs, filters } from '../enums/fixtures.js'
+import { fixtureEnum } from '../enums'
+const { shortAttrs, filters } = fixtureEnum
 import {
   DetailHero,
   FilterBar,

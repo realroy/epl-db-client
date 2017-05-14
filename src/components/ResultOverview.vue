@@ -1,31 +1,14 @@
 <template>
   <div class="container">
     <br>
-    <div class="notification is-danger">
+    <div 
+      v-for="(event, eventIndex) in events"
+      :key="eventIndex"
+      class="notification">
       <article class="media">
-        <div class="media-left">
-          1'
-        </div>
+        <div class="media-left">{{ event.min || '' }}'</div>
         <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>Goal!</strong>
-            </p>
-            Goal! Liverpool 1, Crystal Palace 2. Christian Benteke (Crystal Palace) header from very close range to the high centre of
-            the goal. Assisted by Jason Puncheon following a corner.
-          </div>
-        </div>
-      </article>
-    </div>
-    <div class="notification">
-      <article class="media">
-        <div class="media-left">
-          0'
-        </div>
-        <div class="media-content">
-          <div class="content">
-            Corner, Crystal Palace. Conceded by James Milner.
-          </div>
+          <div class="content"> {{ event.type || '' }}, by {{ event.playerName || '' }} ({{ event.clubName || '' }}). </div>
         </div>
       </article>
     </div>
@@ -33,8 +16,13 @@
 </template>
 
 <script>
-  export default {
-    props: {}
+export default {
+  props: {
+    events: {
+      props: Array,
+      required: true,
+      default: () => []
+    }
   }
-
+}
 </script>

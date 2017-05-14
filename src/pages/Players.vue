@@ -14,7 +14,7 @@
         :onReset="onReset">
       </filter-bar>
       <br>
-      <player-table :isInfinite="true" :players="players"></player-table>
+      <player-table :players="players"></player-table>
       <br>
     </div>
   </div>

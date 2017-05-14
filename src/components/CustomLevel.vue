@@ -6,32 +6,33 @@
     <nav class="level">
       <div
         class="level-item has-text-centered"
-        v-for="i in info">
+        v-for="(each, index) in info" :key="index">
         <div>
-          <p class="heading">{{ i.name }}</p>
-          <p class="title">{{ i.value }}</p>
+          <p class="heading">{{ each.name }}</p>
+          <p class="title">{{ each.value }}</p>
           <br>
         </div>
       </div>
     </nav>
-
   </div>
 </template>
 
 
 <script>
-  export default {
-    props: {
-      name: {
-        required: name,
-        type: String
-      },
-      info: {
-        required: true,
-        type: Array
-      }
+export default {
+  props: {
+    name: {
+      required: name,
+      type: String,
+      default: ''
+    },
+    info: {
+      required: true,
+      type: Array,
+      default: []
     }
   }
+}
 </script>
 
 <style lang="css">

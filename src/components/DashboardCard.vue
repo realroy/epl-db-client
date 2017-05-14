@@ -23,7 +23,8 @@
   export default {
     props: {
       info: {
-        type: Object
+        type: Object,
+        default: () => {}
       },
       onClick: {
         type: Function,

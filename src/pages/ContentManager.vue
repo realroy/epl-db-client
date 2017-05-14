@@ -26,13 +26,18 @@
       <div class="column">
         <div class="container">
           <br>
-          <filter-bar v-if="filters.length > 0" :name="name" :filters="filters" :onUpdate="onUpdate" :onReset="onReset"></filter-bar>
+          <filter-bar
+            v-if="filters.length > 0"
+            :name="name"
+            :filters="filters"
+            :onUpdate="onUpdate"
+            :onReset="onReset">
+          </filter-bar>
           <br>
           <content-table
             :name="name"
             :attrs="attrs"
-            :info="info()"
-          >
+            :info="info()">
           </content-table>
         </div>
       </div>

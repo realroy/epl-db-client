@@ -1,5 +1,5 @@
 export default {
-  verifyAuthRequest ({ commit }, { username, password }) {
+  verifyAuth ({ commit }, { username, password }) {
     (username === 'admin' && password === 'password') ? commit('VALID_AUTH') : commit('INVALID_AUTH')
   },
   logoutRequest ({ commit, store }) {

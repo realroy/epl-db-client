@@ -7,12 +7,12 @@
     </div>
     <div class="card-content">
       <div class="content">
-        <div class="columns is-mutiline" v-for="i in info">
+        <div class="columns is-mutiline" v-for="(each, index) in info" :key="index">
           <div class="column is-6">
-            <h5>{{ i.name }}</h5>
+            <h5>{{ each.name }}</h5>
           </div>
           <div class="column is-6 has-text-right">
-            <span>{{ i.value }}</span>
+            <span>{{ each.value }}</span>
           </div>
         </div>
       </div>
@@ -23,16 +23,18 @@
 
 
 <script>
-  export default {
-    props: {
-      name: {
-        required: true,
-        type: String
-      },
-      info: {
-        required: true,
-        type: Array
-      }
+export default {
+  props: {
+    name: {
+      required: true,
+      type: String,
+      default: ''
+    },
+    info: {
+      required: true,
+      type: Array,
+      default: ''
     }
   }
+}
 </script>

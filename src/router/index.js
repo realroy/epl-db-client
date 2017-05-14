@@ -25,7 +25,6 @@ import {
   ClubOverview,
   FixtureTable,
   ClubStats,
-  ResultLineUp,
   ResultOverview,
   ResultStats
 } from '../components'
@@ -97,10 +96,6 @@ export default new Router({
         {
           path: 'overview',
           component: ResultOverview
-        },
-        {
-          path: 'lineup',
-          component: ResultLineUp
         },
         {
           path: 'stats',

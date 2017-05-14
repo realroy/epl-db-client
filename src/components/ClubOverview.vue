@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import CustomCard from './SideBox'
+import { CustomCard } from './index'
 export default {
   components: {
     CustomCard

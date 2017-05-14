@@ -8,7 +8,7 @@
           </div>
         </div>
       </div>
-      <custom-table :onClick="onClick" :attrs="attrs" :info="filteredFixture[i]"></custom-table>
+      <custom-table :onClick="onClick" :attrs="attrs" :info="filteredInfo[i]"></custom-table>
     </div>
   </div>
 </template>
@@ -16,7 +16,6 @@
 <script>
 import { CustomTable } from './index'
 export default {
-  name: 'fixture-table',
   components: {
     CustomTable
   },
@@ -29,7 +28,7 @@ export default {
       })
       return Object.keys(obj)
     },
-    filteredFixture () {
+    filteredInfo () {
       const arr = []
       this.dates.forEach(date => {
         const raw = this.info.filter(each => new Date(each.date).toDateString() === date)
@@ -45,6 +44,11 @@ export default {
     }
   },
   props: {
+    type: {
+      required: true,
+      type: String,
+      default: 'FIXTURE' || 'RESULT'
+    },
     info: {
       required: true,
       type: Array,
