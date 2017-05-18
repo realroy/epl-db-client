@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav has-shadow" v-if="$store.isValidAuth">
+  <nav class="nav has-shadow" v-if="!$store.isValidAuth">
     <div class="container">
       <div class="nav-left">
         <router-link to="/" class="nav-item">
@@ -36,20 +36,28 @@ export default {
           path: '/results'
         },
         {
-          name: 'Tables', path: '/tables'
+          name: 'Tables',
+          path: '/tables'
         },
         {
-          name: 'Ranking', path: '/ranking'
+          name: 'Ranking',
+          path: '/ranking'
         },
         {
-          name: 'Club', path: '/clubs'
+          name: 'Club',
+          path: '/clubs'
         },
         {
-          name: 'Players', path: '/players'
+          name: 'Players',
+          path: '/players'
         },
         {
           name: 'Manager',
           path: '/managers'
+        },
+        {
+          name: 'Referees',
+          path: '/referees'
         }
       ]
     }

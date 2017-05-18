@@ -15,6 +15,11 @@
       </div>
       <div class="column">
         <div class="column">
+          <match-table
+            type="RESULT"
+            :info="result.info"
+            :attrs="result.attrs">
+          </match-table>
         </div>
         <div class="column">
         </div>
@@ -24,22 +29,48 @@
 </template>
 
 <script>
-import { tableEnum } from '../enums'
-import { CustomTable, DetailHero } from '../components'
-const attrs = tableEnum.shortAttrs
+import { fetch } from '../libs'
+import { tableEnum, resultEnum } from '../enums'
+import { CustomTable, DetailHero, MatchTable } from '../components'
+
 export default {
   async created () {
+    this.table.info = await this.fetchTable()
+    this.result.info = await this.fetchResult()
   },
   components: {
     CustomTable,
-    DetailHero
+    DetailHero,
+    MatchTable
   },
   data () {
     return {
+      result: {
+        attrs: resultEnum.shortAttrs,
+        info: []
+      },
       table: {
-        attrs,
+        attrs: tableEnum.shortAttrs,
         info: []
       }
+    }
+  },
+  methods: {
+    async fetchTable () {
+      const info = await fetch('points')
+      return this.applyLinkToClubDetail(info)
+    },
+    async fetchResult () {
+      const info = await fetch('results', {}, 20, 1)
+      return info
+    },
+    applyLinkToClubDetail (info = []) {
+      return info.map(({ clubName, clubId, point }, index) => [
+        { value: index + 1 },
+        { value: clubName, link: `club/${clubId}` },
+        { value: 30 },
+        { value: point }
+      ])
     }
   }
 }

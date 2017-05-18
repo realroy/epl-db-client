@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { CustomCard } from './index'
+import { CustomCard } from '@/components'
 export default {
   components: {
     CustomCard

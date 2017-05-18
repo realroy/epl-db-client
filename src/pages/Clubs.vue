@@ -8,7 +8,7 @@
     <br>
     <div class="container">
       <div class="columns is-multiline is-mobile">
-        <div class="column is-3" v-for="club in  clubs">
+        <div class="column is-3" v-for="club in clubs">
           <club-card :info="club"></club-card>
         </div>
       </div>
@@ -17,24 +17,28 @@
   </div>
 </template>
 
-
-
 <script>
-  import { mapState } from 'vuex'
-  import { ClubCard, DetailHero } from '@/components'
+import { fetch } from '../libs'
+import { ClubCard, DetailHero } from '@/components'
 
-  export default {
-    created () {
-      this.$store.dispatch('getAllClubs')
-    },
-    components: {
-      ClubCard,
-      DetailHero
-    },
-    computed: {
-      ...mapState({
-        clubs: state => state.clubs.clubs
-      })
+export default {
+  async created () {
+    this.clubs = await this.fetchClubs()
+  },
+  components: {
+    ClubCard,
+    DetailHero
+  },
+  data () {
+    return {
+      clubs: []
+    }
+  },
+  methods: {
+    async fetchClubs () {
+      const clubs = await fetch('clubs')
+      return clubs
     }
   }
+}
 </script>

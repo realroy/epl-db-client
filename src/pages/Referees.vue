@@ -8,11 +8,8 @@
     <br>
     <div class="container">
       <div class="columns is-multiline is-mobile">
-        <div class="column is-3" v-for="manager in managers">
-          <manager-card
-            :imgUrl="`/static/managers/${manager.name}.png`"
-            :info="manager">
-          </manager-card>
+        <div class="column is-3" v-for="referee in referees">
+          <manager-card :info="referee"></manager-card>
         </div>
       </div>
     </div>
@@ -25,7 +22,7 @@ import { fetch } from '../libs'
 import { DetailHero, ManagerCard } from '@/components'
 export default {
   async created () {
-    this.managers = await this.fetchManagers()
+    this.referees = await this.fetchReferees()
   },
   components: {
     DetailHero,
@@ -33,14 +30,15 @@ export default {
   },
   data () {
     return {
-      managers: []
+      referees: []
     }
   },
   methods: {
-    async fetchManagers () {
-      const info = fetch('managers')
+    async fetchReferees () {
+      const info = fetch('referees')
       return info
     }
   }
 }
 </script>
+

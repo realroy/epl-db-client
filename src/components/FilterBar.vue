@@ -13,7 +13,6 @@
         <select
           v-model="selecteds[index]"
           :name="filter.type"
-          :data-index="index"
           @change="updateSelect">
             <option value="">{{ filter.name }}</option>
             <option v-for="(data, dataIndex) in filter.data" :key="dataIndex">{{ data }}</option>
@@ -59,13 +58,8 @@ export default {
     //   })
     // },
     updateSelect (e) {
-      console.log(e.srcElement.dataset.index)
-      if (e.target.name === 'club_name') {
-        const index = e.target.selectedIndex
-        this.onUpdate({ name: 'club_id', value: index })
-      } else {
-        this.onUpdate({name: e.target.name, value: this.selecteds[e.srcElement.dataset.index]})
-      }
+      console.log(e.target.name, e.target.selectedIndex, e.target.value)
+      this.onUpdate(e.target.name, e.target.selectedIndex, e.target.value)
     },
     resetFilter () {
       this.onReset()

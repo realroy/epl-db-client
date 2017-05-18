@@ -7,44 +7,61 @@
     </detail-hero>
     <div class="container is-multiline is-mobile">
       <br>
-      <fixture-table
-        :onClick="goToResultDetail"
-        :info="fixtures"
-        :attrs="attrs">
-      </fixture-table>
-      </div>
+      <page-pagination 
+        :onNextPage="onNextPage"
+        :onPrevPage="onPrevPage">
+      </page-pagination>
+      <br>
+      <match-table
+        type="RESULT"
+        :info="info">
+       </match-table>
+      <page-pagination 
+        :onNextPage="onNextPage"
+        :onPrevPage="onPrevPage">
+      </page-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import { resultEnum } from '../enums'
+import { fetch } from '../libs'
 import {
   DetailHero,
-  FilterBar,
-  FixtureTable
-} from '@/components'
+  MatchTable,
+  PagePagination
+} from '../components'
+
 export default {
   async created () {
+    this.info = await this.fetchInfo()
   },
   components: {
     DetailHero,
-    FilterBar,
-    FixtureTable
+    MatchTable,
+    PagePagination
   },
   data () {
     return {
-      attrs: resultEnum.shortAttrs
+      info: [],
+      page: 1,
+      limit: 20
     }
   },
   methods: {
-    onUpdate ({ name, value }) {
+    async fetchInfo () {
+      const info = await fetch('results', {}, this.limit, this.page)
+      return info
     },
-    onReset () {
+    async onNextPage () {
+      this.page++
+      this.info = await this.fetchInfo()
     },
-    goToResultDetail (id) {
-      this.$router.push(`/result/${id}`)
+    async onPrevPage () {
+      (this.page > 1) ? this.page-- : this.page
+      this.info = await this.fetchInfo()
     }
   }
 }
 </script>
+

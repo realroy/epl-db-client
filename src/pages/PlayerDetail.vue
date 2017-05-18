@@ -1,18 +1,18 @@
 <template>
   <div>
-    <player-hero :number="player.number" :name="player.name" :clubName="player.club_id" :position="player.position">
+    <player-hero :number="player.number" :name="player.name" :clubId="player.clubId" :clubName="player.clubName" :position="player.position">
     </player-hero>
     <br>
     <div class="container">
       <div class="columns is-mutiline">
         <div class="column">
-          <sidebox :name="'Personal Detail'" :info="[
+          <custom-card :name="'Personal Detail'" :info="[
                 {name: 'Nationality', value: this.player.nationality},
                 {name: 'Age', value: 0},
                 {name: 'Date of birth', value: this.player.dob},
                 {name: 'Height', value: this.player.height},
                 {name: 'Weight', value: this.player.weight}]">
-          </sidebox>
+          </custom-card>
         </div>
         <div class="column is-three-quarters">
           <custom-level :name="overview.name" :info="overview.info">
@@ -20,18 +20,18 @@
           <br>
           <div class="columns">
             <div class="column" v-if="player.position === 'Goalkeeper'">
-              <sidebox :name="goalKeeping.name" :info="goalKeeping.info"></sidebox>
+              <custom-card :name="goalKeeping.name" :info="goalKeeping.info"></custom-card>
             </div>
             <div class="column" v-else-if="player.position === 'Forward' || player.position === 'Midfielder'">
-              <sidebox :name="attack.name" :info="attack.info"></sidebox>
+              <custom-card :name="attack.name" :info="attack.info"></custom-card>
             </div>
           </div>
           <div class="columns">
             <div class="column" v-if="player.position === 'Goalkeeper' || player.position === 'Defender'">
-              <sidebox :name="defence.name" :info="defence.info"></sidebox>
+              <custom-card :name="defence.name" :info="defence.info"></custom-card>
             </div>
             <div class="column">
-              <sidebox :name="discipline.name" :info="discipline.info"></sidebox>
+              <custom-card :name="discipline.name" :info="discipline.info"></custom-card>
             </div>
           </div>
         </div>
@@ -41,14 +41,15 @@
 </template>
 
 <script>
+import { fetch } from '../libs'
 import {
   CustomCard,
   CustomLevel,
   PlayerHero
 } from '../components'
 export default {
-  created () {
-    // const { id } = this.$router.currentRoute.params
+  async created () {
+    this.player = await this.fetchPlayer()
   },
   components: {
     CustomLevel,
@@ -103,6 +104,17 @@ export default {
         {name: 'Offsides', value: 0}
       ]
     })
+  },
+  data () {
+    return {
+      player: []
+    }
+  },
+  methods: {
+    async fetchPlayer () {
+      const player = await fetch(`players/${this.$route.params.id}`)
+      return player[0]
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import store from '../store'
+// import store from '../store'
 
 import {
   AdminPage,
@@ -15,33 +15,27 @@ import {
   ManagerPage,
   PlayerDetail,
   PlayerPage,
+  RefereePage,
   ResultDetailPage,
   ResultPage,
   TablePage
 } from '../pages'
 
-import {
-  PlayerTable,
-  ClubOverview,
-  FixtureTable,
-  ClubStats,
-  ResultOverview,
-  ResultStats
-} from '../components'
+import { PlayerTable, ClubOverview, FixtureTable, ClubStats, ResultOverview, ResultStats } from '../components'
 
 Vue.use(Router)
 
-const redirectToDashBoard = (to, from, next) => {
-  if (store.state.validAuth) {
-    next('admin/dashboard')
-  } else {
-    next()
-  }
-}
+// const redirectToDashBoard = (to, from, next) => {
+//   if (store.state.validAuth) {
+//     next('admin/dashboard')
+//   } else {
+//     next()
+//   }
+// }
 
-const verifyAuth = (to, from, next) => {
-  store.state.validAuth ? next() : next('/admin/login')
-}
+// const verifyAuth = (to, from, next) => {
+//   store.state.validAuth ? next() : next('/admin/login')
+// }
 
 export default new Router({
   mode: 'history',
@@ -70,7 +64,6 @@ export default new Router({
       path: '/fixtures',
       name: 'Fixtures',
       component: FixturePage
-
     },
     {
       path: '/results',
@@ -81,6 +74,11 @@ export default new Router({
       path: '/tables',
       name: 'Table',
       component: TablePage
+    },
+    {
+      path: '/referees',
+      name: 'Referees',
+      component: RefereePage
     },
     {
       path: '/player/:id/',
@@ -125,27 +123,23 @@ export default new Router({
           path: 'results',
           component: PlayerTable
         },
-        { path: 'stats',
+        {
+          path: 'stats',
           component: ClubStats
         }
       ]
     },
     {
-      beforeEnter (to, from, next) {
-        store.state.validAuth ? next() : next('/admin/login')
-      },
       path: '/admin',
       name: 'Admin',
       component: AdminPage,
       children: [
         {
-          beforeEnter: redirectToDashBoard,
           name: 'Admin Login',
           path: 'login',
           component: LoginPage
         },
         {
-          beforeEnter: verifyAuth,
           name: 'Admin Dashboard',
           path: 'dashboard',
           component: Dashboard

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image">
-          <img :src="(info.name) ? `/static/managers/${info.name}.png` : '/static/Player-Photo-Missing.png'">
+          <img :src="imgUrl">
       </figure>
     </div>
     <div class="card-content">
@@ -23,11 +23,16 @@ export default {
       type: Object,
       required: true,
       default: () => []
+    },
+    imgUrl: {
+      type: String,
+      default: `/static/Player-Photo-Missing.png`
     }
+
   },
   methods: {
     viewMore (name) {
-      (name) ? this.$router.push(`managers/${name}`) : 'Do nothing'
+      // (name) ? this.$router.push(`managers/${name}`) : 'Do nothing'
     }
   }
 }

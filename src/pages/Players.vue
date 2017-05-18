@@ -9,10 +9,15 @@
       <br>
       <filter-bar
         :name="'player'"
-        :filters="filters"
+        :filters="filterInfo"
         :onUpdate="onUpdate"
         :onReset="onReset">
       </filter-bar>
+      <br>
+      <page-pagination
+        :onNextPage="onNextPage"
+        :onPrevPage="onPrevPage">
+      </page-pagination>
       <br>
       <player-table :players="players"></player-table>
       <br>
@@ -21,26 +26,58 @@
 </template>
 
 <script>
-import { FilterBar, DetailHero, PlayerTable } from '@/components'
-import { filters } from '../enums/fixtures'
+import { fetch } from '../libs'
+import {
+  FilterBar,
+  DetailHero,
+  PlayerTable,
+  PagePagination
+} from '@/components'
+import { playerEnum } from '../enums'
 
 export default {
-  created () {
+  async created () {
+    this.players = await this.fetchPlayers()
   },
   components: {
     FilterBar,
     DetailHero,
-    PlayerTable
+    PlayerTable,
+    PagePagination
   },
   data () {
     return {
-      filters
+      filterInfo: playerEnum.filters,
+      players: [],
+      page: 1,
+      filters: {},
+      limit: 20
     }
   },
   methods: {
-    onUpdate ({ name, value }) {
+    async fetchPlayers () {
+      const data = await fetch('players', this.filters, this.limit, this.page)
+      return data
     },
-    onReset () {
+    async onUpdate (type = '', index = 0, value = '') {
+      (type === 'club_name') ? this.filters['club_id'] = index : this.filters[type] = value
+      this.players = await this.fetchPlayers()
+    },
+    async onReset () {
+      this.page = 1
+      this.filters = {}
+      this.limit = 20
+      this.players = await this.fetchPlayers()
+    },
+    async onNextPage () {
+      this.page++
+      const data = await fetch('players', this.filters, this.limit, this.page)
+      this.players = data
+    },
+    async onPrevPage () {
+      this.page > 1 ? this.page-- : this.page
+      const data = await fetch('players', this.filters, this.limit, this.page)
+      this.players = data
     }
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <detail-hero
       :title="club.name"
-      :imgUrl="`/static/club-badge/${club.id}.svg`"
+      :imgUrl="`/static/club-badge/${$route.params.id}.svg`"
       :subtitles="[
         {
           name: 'Stadium Name',
@@ -30,12 +30,25 @@
 </template>
 
 <script>
+import { fetch } from '../libs'
 import { DetailHero } from '../components'
 export default {
-  created () {
+  async created () {
+    this.club = this.fetchClub()
   },
   components: {
     DetailHero
+  },
+  data () {
+    return {
+      club: {}
+    }
+  },
+  methods: {
+    async fetchClub () {
+      const data = await fetch(`clubs/${this.$route.params.id}`)
+      return data[0]
+    }
   }
 }
 </script>

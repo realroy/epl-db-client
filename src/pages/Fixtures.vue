@@ -7,48 +7,59 @@
     </detail-hero>
     <div class="container is-multiline is-mobile">
       <br>
-      <filter-bar
-        :name="'fixture'"
-        :filters="filters"
-        :onUpdate="onUpdate"
-        :onReset="onReset">
-      </filter-bar>
-      <fixture-table
-        :info="fixtures"
-        :attrs="attrs">
-      </fixture-table>
-      </div>
+      <page-pagination 
+        :onNextPage="onNextPage"
+        :onPrevPage="onPrevPage">
+      </page-pagination>
+      <br>
+      <match-table
+        type="FIXTURE"
+        :info="info">
+       </match-table>
+      <page-pagination 
+        :onNextPage="onNextPage"
+        :onPrevPage="onPrevPage">
+      </page-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import { fixtureEnum } from '../enums'
-const { shortAttrs, filters } = fixtureEnum
+import { fetch } from '../libs'
 import {
   DetailHero,
-  FilterBar,
-  FixtureTable
-} from '@/components'
+  MatchTable,
+  PagePagination
+} from '../components'
 
 export default {
   async created () {
+    this.info = await this.fetchInfo()
   },
   components: {
     DetailHero,
-    FilterBar,
-    FixtureTable
+    MatchTable,
+    PagePagination
   },
   data () {
     return {
-      attrs: shortAttrs,
-      filters
+      info: [],
+      page: 1,
+      limit: 20
     }
   },
   methods: {
-    onUpdate ({ name, value }) {
+    async fetchInfo () {
+      const info = await fetch('fixtures', {}, this.limit, this.page)
+      return info
     },
-    onReset () {
+    async onNextPage () {
+      this.page++
+      this.info = await this.fetchInfo()
+    },
+    async onPrevPage () {
+      (this.page > 1) ? this.page-- : this.page
+      this.info = await this.fetchInfo()
     }
   }
 }

@@ -8,7 +8,7 @@
           </div>
         </div>
       </div>
-      <custom-table :onClick="onClick" :attrs="attrs" :info="filteredInfo[i]"></custom-table>
+      <custom-table :onClick="onClick" :attrs="attrs" :info="filteredInfo(dates[dateIndex])"></custom-table>
     </div>
   </div>
 </template>
@@ -27,20 +27,35 @@ export default {
         obj[key] = key
       })
       return Object.keys(obj)
+    }
+  },
+  data () {
+    return {
+      attrs: (this.type === 'RESULT') ? require('../enums/results').shortAttrs : require('../enums/fixtures.js').shortAttrs
+    }
+  },
+  methods: {
+    onClick (id) {
+      (this.type === 'RESULT') ? this.$router.push(`/result/${id}`) : 'Do nothing'
     },
-    filteredInfo () {
-      const arr = []
-      this.dates.forEach(date => {
-        const raw = this.info.filter(each => new Date(each.date).toDateString() === date)
-        arr.push(
-          raw.map(each => ([
-            { id: each.id, value: each.home_id, link: `/club/${each.home_id}/` },
-            { id: each.id, value: new Date(each.date).toTimeString().split(' ')[0].split(':').slice(0, -1).join('.'), hasTag: true },
-            { id: each.id, value: each.away_id, link: `/club/${each.away_id}/` }
-          ]))
-        )
-      })
-      return arr
+    formatResults ({ fixtureId, homeName, homeGoal, awayName, awayGoal }) {
+      return [
+        { id: fixtureId, value: homeName, link: `/result/${fixtureId}` },
+        { id: fixtureId, value: `${homeGoal} - ${awayGoal}`, hasTag: true },
+        { id: fixtureId, value: awayName, link: `/result/${fixtureId}` }
+      ]
+    },
+    formatFixtures ({ fixtureId, homeName, homeId, date, awayName, awayId }) {
+      return [
+        { id: fixtureId, value: homeName, link: `/club/${homeId}/` },
+        { id: fixtureId, value: new Date(date).toTimeString().split(' ')[0].split(':').slice(0, -1).join('.'), hasTag: true },
+        { id: fixtureId, value: awayName, link: `/club/${awayId}/` }
+      ]
+    },
+    filteredInfo (date) {
+      const info = this.info.filter(match => new Date(match.date).toDateString() === date)
+      const results = (this.type === 'RESULT') ? info.map(this.formatResults) : info.map(this.formatFixtures)
+      return results
     }
   },
   props: {
@@ -53,15 +68,6 @@ export default {
       required: true,
       type: Array,
       default: () => []
-    },
-    attrs: {
-      required: true,
-      type: Array,
-      default: () => []
-    },
-    onClick: {
-      type: Function,
-      default: () => {}
     }
   }
 }

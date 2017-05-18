@@ -3,7 +3,7 @@
     <a
       @click="prev"
       class="pagination-previous">
-      Previous
+      Previous page
     </a>
     <a
       @click="next"
@@ -30,7 +30,7 @@ export default {
       this.onNextPage()
     },
     prev () {
-      this.onPrevPage
+      this.onPrevPage()
     }
   }
 }

@@ -30,6 +30,10 @@ export default {
     },
     number: {
       require: true,
+      type: String
+    },
+    clubId: {
+      require: true,
       type: Number
     },
     clubName: {

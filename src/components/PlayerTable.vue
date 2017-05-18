@@ -7,15 +7,16 @@
 </template>
 
 <script>
-import PlayerCard from './PlayerCard.vue'
+import { PlayerCard } from './index'
 export default {
   components: {
     PlayerCard
   },
   props: {
-    column: {
-      type: Number,
-      default: 3
+    players: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   }
 }

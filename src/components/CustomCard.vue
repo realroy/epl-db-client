@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'custom-card',
   props: {
     name: {
       required: true,

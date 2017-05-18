@@ -22,16 +22,12 @@
       attrs: {
         type: Array,
         required: true,
-        default () {
-          return []
-        }
+        default: () => []
       },
       info: {
         type: Array,
         required: true,
-        default () {
-          return []
-        }
+        default: () => []
       },
       onClick: {
         type: Function,
