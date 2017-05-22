@@ -19,17 +19,6 @@
           </custom-level>
           <br>
           <div class="columns">
-            <div class="column" v-if="player.position === 'Goalkeeper'">
-              <custom-card :name="goalKeeping.name" :info="goalKeeping.info"></custom-card>
-            </div>
-            <div class="column" v-else-if="player.position === 'Forward' || player.position === 'Midfielder'">
-              <custom-card :name="attack.name" :info="attack.info"></custom-card>
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column" v-if="player.position === 'Goalkeeper' || player.position === 'Defender'">
-              <custom-card :name="defence.name" :info="defence.info"></custom-card>
-            </div>
             <div class="column">
               <custom-card :name="discipline.name" :info="discipline.info"></custom-card>
             </div>
@@ -50,6 +39,12 @@ import {
 export default {
   async created () {
     this.player = await this.fetchPlayer()
+    this.goal = await this.fetchGoal()
+    this.assist = await this.fetchAssist()
+    this.yellow = await this.fetchYellow()
+    this.red = await this.fetchRed()
+    this.foul = await this.fetchFoul()
+    this.offside = await this.fetchOffside()
   },
   components: {
     CustomLevel,
@@ -57,63 +52,78 @@ export default {
     CustomCard
   },
   computed: {
-    overview: () => ({
-      name: 'Overview',
-      info: [
-        {name: 'Appearances', value: 0},
-        {name: 'Clean Sheets', value: 0, only: ['GoalKeeper', 'Defender']},
-        {name: 'Goals', value: 0},
-        {name: 'Assists', value: 0},
-        {name: 'Win', value: 0},
-        {name: 'Losses', value: 0}
-      ]
-    }),
-    defence: () => ({
-      name: 'Defence',
-      info: [
-        {name: 'Clean Sheets', value: 0, only: ['GoalKeeper', 'Defender']},
-        {name: 'Goals Conceded', value: 0},
-        {name: 'Own Goals', value: 0},
-        {name: 'Blocked Shots', value: 0}
-      ]
-    }),
-    goalKeeping: () => ({
-      name: 'GoalKeeping',
-      info: [
-        {name: 'Saves', value: 0},
-        {name: 'Penalties Saves', value: 0}
-      ]
-    }),
-    attack: () => ({
-      name: 'Attack',
-      info: [
-        {name: 'Goals', value: 0},
-        {name: 'Goals Per Match', value: 0.0},
-        {name: 'Penalties Scored', value: 0},
-        {name: 'Shots', value: 0},
-        {name: 'Shots On target', value: 0},
-        {name: 'Shooting Acc %', value: 0.0}
-      ]
-    }),
-    discipline: () => ({
-      name: 'Discipline',
-      info: [
-        {name: 'Yellow Cards', value: 0},
-        {name: 'Red Cards', value: 0},
-        {name: 'Fouls', value: 0},
-        {name: 'Offsides', value: 0}
-      ]
-    })
+    overview () {
+      return {
+        name: 'Overview',
+        info: [
+          { name: 'Goals', value: this.goal },
+          { name: 'Assists', value: this.assist },
+          { name: 'Win', value: 0 },
+          { name: 'Losses', value: 0 }
+        ]
+      }
+    },
+    discipline () {
+      return {
+        name: 'Discipline',
+        info: [
+          { name: 'Yellow Cards', value: this.yellow },
+          { name: 'Red Cards', value: this.red },
+          { name: 'Fouls', value: this.foul },
+          { name: 'Offsides', value: this.offside }
+        ]
+      }
+    }
   },
   data () {
     return {
-      player: []
+      player: [],
+      goal: '',
+      assist: '',
+      win: 0,
+      lost: 0,
+      yellow: '',
+      red: '',
+      foul: '',
+      offside: ''
     }
   },
   methods: {
     async fetchPlayer () {
       const player = await fetch(`players/${this.$route.params.id}`)
       return player[0]
+    },
+    async fetchGoal () {
+      const data = await fetch(`players/${this.$route.params.id}/goals`)
+      return (data.length === 0) ? 0 : data[0].goals
+    },
+    async fetchAssist () {
+      const data = await fetch(`players/${this.$route.params.id}/assist`)
+      return (data.length === 0) ? 0 : data[0].assist
+    },
+    // async fetchWin () {
+    //   const data = await fetch(`players/${this.$route.params.id}/wins`)
+    //   return (data.length () === 0) ? 0 : data[0].wins
+    // },
+    // async fetchLost () {
+    //   const data = await fetch(`players/${this.$route.params.id}/losts`)
+    //   return (data.length () === 0) ? 0 : data[0].losts
+    // },
+    async fetchYellow () {
+      const data = await fetch(`players/${this.$route.params.id}/yellowCard`)
+      return (data.length === 0) ? 0 : data[0].yellowCard
+    },
+    async fetchRed () {
+      const data = await fetch(`players/${this.$route.params.id}/redCard`)
+      return (data.length === 0) ? 0 : data[0].redCard
+    },
+    async fetchFoul () {
+      const data = await fetch(`players/${this.$route.params.id}/fouls`)
+      return (data.length === 0) ? 0 : data[0].fouls
+    },
+    async fetchOffside () {
+      const data = await fetch(`players/${this.$route.params.id}/offside`)
+      return (data.length === 0) ? 0 : data[0].offside
     }
   }
 }
