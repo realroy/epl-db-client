@@ -35,6 +35,9 @@ export default {
       const fixtures = await fetch('fixtures', {}, this.limit, this.page)
       return fixtures.map(({ id, date, homeName, awayName }) => ({ isSelected: false, id, date, homeName, awayName }))
     },
+    async onNext () {
+
+    },
     async onPost (data = {}) {
       await post(this.name.toLowerCase(), data)
       await this.fetchFixtures()
