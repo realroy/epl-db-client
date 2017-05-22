@@ -13,11 +13,14 @@
       </thead>
       <tbody>
         <tr v-for="(rows, rowIndex) in info">
-          <td>
-            <input type="checkbox" v-model="selecteds[rowIndex]">
-          </td>
-          <td v-for="column in rows" @click="onClick(rows.id)">
-            {{ column }}
+          <td v-for="(value, key, tdIndex) in rows">
+            <input
+              v-if='key === "isSelected"'
+              :id="`${rowIndex}-${tdIndex}`"
+              :value="rows.id"
+              type="checkbox"
+              v-model="selected">
+            <span @click="onClick(rowIndex)">{{ typeof value === 'boolean' ? '': value }}</span>
           </td>
         </tr>
       </tbody>
@@ -29,30 +32,21 @@
 export default {
   data () {
     return {
-      selecteds: new Array(this.info.length).fill(false),
-      id: 0,
-      modalActive: false
+      selected: [],
+      id: 0
     }
   },
   methods: {
     onClick (id) {
-      this.id = id
-      this.modalActive = true
-    },
-    onClose () {
-      this.modalActive = false
-    },
-    onSelect (id) {
-      this.selecteds[id] = true
-      this.whenSelect(this.selecteds)
-    },
-    onUnselect (id) {
-      this.selecteds[id] = false
-      this.whenSelect(this.selecteds)
+      this.handleClick(id)
     },
     onSelectAll () {
-      this.selecteds = this.selecteds.fill(true)
-      this.whenSelect(this.selecteds)
+      this.selected = this.info.map(({ id }) => id)
+      console.log(this.selected)
+      this.handleSelectAll(this.selected)
+    },
+    onUnSelectAll () {
+      this.selected = []
     }
   },
   props: {
@@ -70,6 +64,16 @@ export default {
       required: true,
       type: Array,
       default: () => []
+    },
+    handleClick: {
+      required: true,
+      type: Function,
+      default: () => {}
+    },
+    handleSelectAll: {
+      required: true,
+      type: Function,
+      default: () => {}
     }
   }
 }

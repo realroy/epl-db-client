@@ -1,45 +1,42 @@
 <template>
   <div
-    v-bind:class="{ 'is-active' : modalActive }"
+    v-bind:class="{ 'is-active' : isActive }"
     class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title"> {{ name }} </p>
         <button
-          @click="onClose"
+          @click="handleClose"
           class="delete is-large">
         </button>
       </header>
       <section class="modal-card-body">
-        <div
-          v-for="(key, value) in info"
-          :key="key"
-          class="field has-addons">
-          <p class="control">
-            <a v-if="key === 'id'" class="button" disabled> {{ key }} </a>
-            <a v-else class="button"> {{ key }} </a>
-          </p>
-          <p class="control is-expanded">
-            <input
-              v-if="key === 'id'"
-              type="text"
-              :value="value"
-              class="input"
-              disabled>
-            <input
-              type="text"
-              :value="value"
-              class="input">
-          </p>
-        </div>
+        <form>
+          <div
+            v-for="(value, key) in info"
+            :key="key"
+            class="field has-addons">
+            <p class="control">
+              <a class="button"> {{ key }} </a>
+            </p>
+            <p class="control is-expanded">
+              <input
+                :ref="key"
+                type="text"
+                :value="value"
+                :v-model="texts"
+                class="input">
+            </p>
+          </div>
+        </form>
       </section>
       <footer class="modal-card-foot">
         <a @click="onSave"
           class="button is-success" >
           Save changes
         </a>
-        <a @click="onClose"
+        <a @click="handleClose"
           class="button is-danger" >
           Cancel
         </a>
@@ -50,6 +47,16 @@
 
 <script>
 export default {
+  data () {
+    return {
+      texts: []
+    }
+  },
+  methods: {
+    onSave () {
+      this.handleSave(this.$refs)
+    }
+  },
   props: {
     isActive: {
       type: Boolean,
@@ -59,11 +66,15 @@ export default {
       type: String,
       default: ''
     },
-    onClose: {
+    info: {
+      type: Object,
+      default: () => {}
+    },
+    handleClose: {
       type: Function,
       default: () => {}
     },
-    onSave: {
+    handleSave: {
       type: Function,
       default: () => {}
     }
