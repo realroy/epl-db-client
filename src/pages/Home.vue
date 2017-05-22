@@ -65,11 +65,11 @@ export default {
       return info
     },
     applyLinkToClubDetail (info = []) {
-      return info.map(({ clubName, clubId, point }, index) => [
+      return info.map(({ clubs, played, points }, index) => [
         { value: index + 1 },
-        { value: clubName, link: `club/${clubId}` },
-        { value: 30 },
-        { value: point }
+        { value: clubs },
+        { value: played },
+        { value: points }
       ])
     }
   }

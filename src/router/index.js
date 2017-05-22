@@ -8,7 +8,7 @@ import {
   ClubPage,
   ClubDetail,
   Dashboard,
-  FixtureContent,
+  FixtureDashboard,
   FixturePage,
   HomePage,
   LoginPage,
@@ -147,7 +147,7 @@ export default new Router({
         {
           name: 'Fixtures Content Manager',
           path: 'fixtures',
-          component: FixtureContent
+          component: FixtureDashboard
         }
       ]
     }

@@ -42,7 +42,7 @@
         <div class="container">
           <br>
           <filter-bar
-            v-if="filters.length > 0"
+            v-if="filterInfo.length > 0"
             :name="name"
             :filters="filters"
             :onUpdate="onUpdate"
@@ -94,6 +94,7 @@ import {
   PagePagination
 } from '../components'
 export default {
+  name: 'content-manager',
   components: {
     ContentModal,
     DetailHero,
@@ -132,10 +133,6 @@ export default {
     onSelectAll () {
       this.selected = this.info.map(each => each.id)
     },
-    onSelect (id = 1) {
-      this.selected[id] = id
-      this.id = id
-    },
     onUnselectAll () {
       this.selected = []
     },
@@ -171,9 +168,13 @@ export default {
       required: true,
       type: Array
     },
-    filters: {
+    filterInfo: {
       type: Array,
       default: () => []
+    },
+    filters: {
+      type: Object,
+      default: () => {}
     },
     info: {
       required: true,

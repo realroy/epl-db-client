@@ -36,14 +36,14 @@ export default {
       return this.applyLinkToClubDetail(info)
     },
     applyLinkToClubDetail (info = []) {
-      return info.map(({ clubName, clubId, point, win, draw, loss }, index) => [
+      return info.map(({ clubs, played, wins, draws, losses, points }, index) => [
         { value: index + 1 },
-        { value: clubName, link: `club/${clubId}` },
-        { value: 30 },
-        { value: win },
-        { value: draw },
-        { value: loss },
-        { value: point }
+        { value: clubs },
+        { value: played },
+        { value: wins },
+        { value: draws },
+        { value: losses },
+        { value: points }
       ])
     }
   }
