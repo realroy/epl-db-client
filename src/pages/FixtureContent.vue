@@ -5,7 +5,9 @@
     :info="info"
     :handlePost="onPost"
     :handlePut="onPut"
-    :handleDelete="onDelete">
+    :handleDelete="onDelete"
+    :handleNextPage="onNextPage"
+    :handlePrevPage="onPrevPage">
    </content-manager>
 </template>
 
@@ -15,7 +17,7 @@ import { fixtureEnum } from '../enums'
 import { ContentManager } from './index'
 export default {
   async created () {
-    this.info = await this.fetchFixtures()
+    this.info = await this.fetchInfo()
   },
   components: {
     ContentManager
@@ -31,24 +33,29 @@ export default {
     }
   },
   methods: {
-    async fetchFixtures () {
-      const fixtures = await fetch('fixtures', {}, this.limit, this.page)
-      return fixtures.map(({ id, date, homeName, awayName }) => ({ isSelected: false, id, date, homeName, awayName }))
+    async fetchInfo () {
+      const info = await fetch('fixtures', {}, this.limit, this.page)
+      return info.map(({ id, date, homeName, awayName }) => ({ id, date, homeName, awayName }))
     },
-    async onNext () {
-
+    async onNextPage () {
+      this.page++
+      this.info = await this.fetchInfo()
+    },
+    async onPrevPage () {
+      (this.page > 1) ? this.page-- : this.page
+      this.info = await this.fetchInfo()
     },
     async onPost (data = {}) {
       await post(this.name.toLowerCase(), data)
-      await this.fetchFixtures()
+      await this.fetchInfo()
     },
     async onPut (data = {}) {
       await put(this.name.toLowerCase(), data)
-      await this.fetchFixtures()
+      await this.fetchInfo()
     },
     async onDelete (id = 0) {
       await del(this.name.toLowerCase(), id)
-      await this.fetchFixtures()
+      await this.fetchInfo()
     }
   }
 }

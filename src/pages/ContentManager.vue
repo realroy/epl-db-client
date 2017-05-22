@@ -49,13 +49,37 @@
             :onReset="onReset">
           </filter-bar>
           <br>
-          <content-table
-            :name="name"
-            :attrs="attrs"
-            :info="info"
-            :handleSelectAll="onSelectAll"
-            :handleClick="onClickTable">
-          </content-table>
+          <page-pagination
+            :onNextPage="handleNextPage"
+            :onPrevPage="handlePrevPage">
+          </page-pagination>
+          <br>
+          <div>
+            <table class="table is-bordered is-narrow">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th v-for="(attr, index) in attrs" :key="index">
+                    {{ attr }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(rows, rowIndex) in info">
+                  <td>
+                    <input
+                    :id="`${rowIndex}`"
+                    :value="rows.id"
+                    type="checkbox"
+                    v-model="selected">
+                  </td>
+                  <td v-for="(value, key) in rows">
+                    <span @click="onClickTable(rowIndex)">{{ typeof value === 'boolean' ? '': value }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -65,16 +89,16 @@
 <script>
 import {
   ContentModal,
-  ContentTable,
   DetailHero,
-  FilterBar
+  FilterBar,
+  PagePagination
 } from '../components'
 export default {
   components: {
     ContentModal,
-    ContentTable,
     DetailHero,
-    FilterBar
+    FilterBar,
+    PagePagination
   },
   computed: {
     templateInfo () {
@@ -106,17 +130,14 @@ export default {
       this.mode = 'DEFAULT'
     },
     onSelectAll () {
-      this.info.map((each) => {
-        each.isSelected = true
-        return each
-      })
+      this.selected = this.info.map(each => each.id)
     },
     onSelect (id = 1) {
       this.selected[id] = id
       this.id = id
     },
     onUnselectAll () {
-      this.selected = {}
+      this.selected = []
     },
     async onSaveModal (data) {
       switch (this.mode) {
@@ -175,6 +196,14 @@ export default {
       type: Function
     },
     handleDelete: {
+      default: () => {},
+      type: Function
+    },
+    handleNextPage: {
+      default: () => {},
+      type: Function
+    },
+    handlePrevPage: {
       default: () => {},
       type: Function
     }
