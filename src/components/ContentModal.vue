@@ -25,7 +25,6 @@
                 :ref="key"
                 type="text"
                 :value="value"
-                :v-model="texts"
                 class="input">
             </p>
           </div>
@@ -47,14 +46,16 @@
 
 <script>
 export default {
-  data () {
-    return {
-      texts: []
-    }
-  },
   methods: {
     onSave () {
-      this.handleSave(this.$refs)
+      const result = Object.keys(this.$refs).reduce(
+        (prev, key) => {
+          (this.$refs[key][0].value) ? prev[key] = this.$refs[key][0].value : prev
+          prev[key] = (parseInt(prev[key])) ? parseInt(prev[key]) : prev[key]
+          return prev
+        }
+      , {})
+      this.handleSave(result)
     }
   },
   props: {

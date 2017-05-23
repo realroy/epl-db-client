@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     onDelete () {
-      this.handleDelete(this.id)
+      this.handleDelete(this.selected)
     },
     onClickTable (id) {
       this.id = id

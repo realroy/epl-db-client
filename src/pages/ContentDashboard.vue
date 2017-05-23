@@ -20,16 +20,21 @@ export default {
   },
   methods: {
     async onPost (data = {}) {
-      await post(this.name.toLowerCase(), data)
-      await this.fetchInfo()
+      console.log('onPost')
+      const res = await post(this.name.toLowerCase(), data)
+      console.log(res)
+      await this.refreshInfo()
     },
     async onPut (data = {}) {
-      await put(this.name.toLowerCase(), data)
-      await this.fetchInfo()
+      console.log('onPut')
+      const res = await put(this.name.toLowerCase(), data)
+      console.log(res)
+      await this.refreshInfo()
     },
-    async onDelete (id = 0) {
-      await del(this.name.toLowerCase(), id)
-      await this.fetchInfo()
+    async onDelete (id = []) {
+      console.log('onDelete')
+      await id.forEach(async (each) => await del(this.name.toLowerCase(), each))
+      await this.refreshInfo()
     }
   },
   props: {
@@ -42,6 +47,10 @@ export default {
       type: Array,
       default: () => [],
       required: true
+    },
+    refreshInfo: {
+      type: Function,
+      default: () => {}
     },
     filterInfo: {
       type: Array,

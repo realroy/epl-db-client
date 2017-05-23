@@ -2,6 +2,7 @@
   <content-dashboard
     :attrs="attrs"
     :info="info"
+    :refreshInfo="refreshInfo"
     :filterInfo="filterInfo"
     :handleNextPage="onNextPage"
     :handlePrevPage="onPrevPage"
@@ -15,7 +16,7 @@ import ContentDashboard from './ContentDashboard'
 import { playerEnum } from '../enums'
 export default {
   async created () {
-    this.info = await this.fetchInfo()
+    await this.refreshInfo()
   },
   components: {
     'content-dashboard': ContentDashboard
@@ -32,6 +33,9 @@ export default {
     }
   },
   methods: {
+    async refreshInfo () {
+      this.info = await this.fetchInfo()
+    },
     async fetchInfo () {
       const info = await fetch(this.name, this.filter, 20, this.page)
       return info.map(({ id, number, name, club_id, position, nationality, dob, height, weight }) => ({ id, number, name, club_id, position, nationality, dob, height, weight }))

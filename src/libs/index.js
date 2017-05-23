@@ -20,6 +20,7 @@ export const fetch = async (content = '', attrs = {}, limit = 0, page = 1) => {
 }
 
 export const post = async (content = '', params = {}) => {
+  console.log(params)
   const res = await axios.post(`${API_ENDPOINT}/${content}`, params)
   return res.data
 }
