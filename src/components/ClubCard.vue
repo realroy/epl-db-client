@@ -12,7 +12,6 @@
           <p class="subtitle is-6">{{ info.stadium_name }}</p>
         </div>
       </div>
-      <button class="button is-primary is-fullwidth">View more...</button>
     </div>
   </div>
 </template>
@@ -30,7 +29,7 @@ export default {
   },
   methods: {
     viewMore (id) {
-      this.$router.push(`club/${id}`)
+      // this.$router.push(`club/${id}`)
     }
   }
 }

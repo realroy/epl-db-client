@@ -34,7 +34,7 @@ export default {
   methods: {
     async fetchInfo () {
       const info = await fetch(this.name, this.filter, 20, this.page)
-      return info.map(({ id, date, homeName, awayName }) => ({ id, date, homeName, awayName }))
+      return info.map(({ id, date, home_id, away_id }) => ({ id, date, home_id, away_id }))
     },
     async onNextPage () {
       this.page++

@@ -1,8 +1,8 @@
 <template>
   <content-dashboard
-    :attrs="attrs"
     :info="info"
     :filterInfo="filterInfo"
+    :refreshInfo="refreshInfo"
     :handleNextPage="onNextPage"
     :handlePrevPage="onPrevPage"
     :name="name">
@@ -15,7 +15,7 @@ import ContentDashboard from './ContentDashboard'
 import { clubEnum } from '../enums'
 export default {
   async created () {
-    this.info = await this.fetchInfo()
+    await this.refreshInfo()
   },
   components: {
     'content-dashboard': ContentDashboard
@@ -32,9 +32,12 @@ export default {
     }
   },
   methods: {
+    async refreshInfo () {
+      this.info = await this.fetchInfo()
+    },
     async fetchInfo () {
       const info = await fetch(this.name, this.filter, 20, this.page)
-      return info.map(({ id, name, stadium_name, official_site, manager_id }) => ({ id, name, stadium_name, official_site, manager_id }))
+      return info.map(({ id, stadium_name, official_site, manager_id }) => ({ id, stadium_name, official_site, manager_id }))
     },
     async onNextPage () {
       this.page++

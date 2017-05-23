@@ -1,7 +1,6 @@
 <template>
   <content-manager
     :name="name"
-    :attrs="attrs"
     :info="info"
     :handlePost="onPost"
     :handlePut="onPut"
@@ -38,11 +37,6 @@ export default {
     }
   },
   props: {
-    attrs: {
-      type: Array,
-      default: () => [],
-      required: true
-    },
     info: {
       type: Array,
       default: () => [],

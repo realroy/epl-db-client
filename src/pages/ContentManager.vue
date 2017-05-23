@@ -102,6 +102,9 @@ export default {
     PagePagination
   },
   computed: {
+    attrs () {
+      return Object.keys(this.info[0]) || []
+    },
     templateInfo () {
       return this.attrs.reduce((prev, key) => {
         prev[key] = ''
@@ -163,10 +166,6 @@ export default {
     name: {
       required: true,
       type: String
-    },
-    attrs: {
-      required: true,
-      type: Array
     },
     filterInfo: {
       type: Array,

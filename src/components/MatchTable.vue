@@ -8,12 +8,13 @@
           </div>
         </div>
       </div>
-      <custom-table :onClick="onClick" :attrs="attrs" :info="filteredInfo(dates[dateIndex])"></custom-table>
+      <custom-table :onClick="() => {}" :attrs="attrs" :info="filteredInfo(dates[dateIndex])"></custom-table>
     </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable camelcase */
 import { CustomTable } from './index'
 export default {
   components: {
@@ -38,18 +39,18 @@ export default {
     onClick (id) {
       (this.type === 'RESULT') ? this.$router.push(`/result/${id}`) : 'Do nothing'
     },
-    formatResults ({ fixtureId, homeName, homeGoal, awayName, awayGoal }) {
+    formatResults ({ fixture_id, home_name, home_score, away_name, away_score }) {
       return [
-        { id: fixtureId, value: homeName, link: `/result/${fixtureId}` },
-        { id: fixtureId, value: `${homeGoal} - ${awayGoal}`, hasTag: true },
-        { id: fixtureId, value: awayName, link: `/result/${fixtureId}` }
+        { id: fixture_id, value: home_name },
+        { id: fixture_id, value: `${home_score} - ${away_score}`, hasTag: true },
+        { id: fixture_id, value: away_name }
       ]
     },
-    formatFixtures ({ fixtureId, homeName, homeId, date, awayName, awayId }) {
+    formatFixtures ({ fixture_id, home_name, home_id, date, away_name, away_id }) {
       return [
-        { id: fixtureId, value: homeName, link: `/club/${homeId}/` },
-        { id: fixtureId, value: new Date(date).toTimeString().split(' ')[0].split(':').slice(0, -1).join('.'), hasTag: true },
-        { id: fixtureId, value: awayName, link: `/club/${awayId}/` }
+        { id: fixture_id, value: home_name },
+        { id: fixture_id, value: new Date(date).toTimeString().split(' ')[0].split(':').slice(0, -1).join('.'), hasTag: true },
+        { id: fixture_id, value: away_name }
       ]
     },
     filteredInfo (date) {

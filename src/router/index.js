@@ -20,6 +20,7 @@ import {
   PlayerPage,
   RefereeDashboard,
   RefereePage,
+  ResultDashboard,
   ResultDetailPage,
   ResultPage,
   TablePage
@@ -156,7 +157,7 @@ export default new Router({
         {
           name: 'Result Content Manager',
           path: 'results',
-          component: FixtureDashboard
+          component: ResultDashboard
         },
         {
           name: 'Club Content Manager',
