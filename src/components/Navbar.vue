@@ -40,10 +40,6 @@ export default {
           path: '/tables'
         },
         {
-          name: 'Ranking',
-          path: '/ranking'
-        },
-        {
           name: 'Club',
           path: '/clubs'
         },

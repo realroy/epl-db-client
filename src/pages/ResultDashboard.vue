@@ -5,14 +5,14 @@
     :filterInfo="filterInfo"
     :handleNextPage="onNextPage"
     :handlePrevPage="onPrevPage"
-    :name="'fixtures'">
+    :name="name">
   </content-dashboard>
 </template>
 
 <script>
 import { fetch } from '../libs'
 import { ContentDashboard } from './index'
-import { fixtureEnum } from '../enums'
+import { resultEnum } from '../enums'
 export default {
   async created () {
     this.info = await this.fetchInfo()
@@ -22,19 +22,19 @@ export default {
   },
   data () {
     return {
-      name: 'fixtures',
-      filterInfo: fixtureEnum.filters,
+      name: 'results',
+      filterInfo: resultEnum.filters,
       filter: {},
       info: [],
       page: 1,
       limit: 20,
-      attrs: fixtureEnum.attrs
+      attrs: resultEnum.attrs
     }
   },
   methods: {
     async fetchInfo () {
       const info = await fetch(this.name, this.filter, 20, this.page)
-      return info.map(({ id, date, homeName, awayName }) => ({ id, date, homeName, awayName }))
+      return info.map(({ fixtureId, date, homeId, homeName, awayId, awayName, homeGoal, awayGoal }) => ({ fixtureId, date, homeId, homeName, awayId, awayName, homeGoal, awayGoal }))
     },
     async onNextPage () {
       this.page++
@@ -47,4 +47,3 @@ export default {
   }
 }
 </script>
-

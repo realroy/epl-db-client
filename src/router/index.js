@@ -5,6 +5,7 @@ import Router from 'vue-router'
 
 import {
   AdminPage,
+  ClubDashboard,
   ClubPage,
   ClubDetail,
   Dashboard,
@@ -12,9 +13,12 @@ import {
   FixturePage,
   HomePage,
   LoginPage,
+  ManagerDashboard,
   ManagerPage,
+  PlayerDashboard,
   PlayerDetail,
   PlayerPage,
+  RefereeDashboard,
   RefereePage,
   ResultDetailPage,
   ResultPage,
@@ -148,6 +152,31 @@ export default new Router({
           name: 'Fixtures Content Manager',
           path: 'fixtures',
           component: FixtureDashboard
+        },
+        {
+          name: 'Result Content Manager',
+          path: 'results',
+          component: FixtureDashboard
+        },
+        {
+          name: 'Club Content Manager',
+          path: 'clubs',
+          component: ClubDashboard
+        },
+        {
+          name: 'Player Content Manager',
+          path: 'players',
+          component: PlayerDashboard
+        },
+        {
+          name: 'Manager Content Manager',
+          path: 'managers',
+          component: ManagerDashboard
+        },
+        {
+          name: 'Referee Content Manager',
+          path: 'referees',
+          component: RefereeDashboard
         }
       ]
     }

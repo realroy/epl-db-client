@@ -13,10 +13,10 @@
 
 <script>
 import { post, put, del } from '../libs'
-import { ContentManager } from './index'
+import ContentManager from './ContentManager'
 export default {
   components: {
-    ContentManager
+    'content-manager': ContentManager
   },
   methods: {
     async onPost (data = {}) {
