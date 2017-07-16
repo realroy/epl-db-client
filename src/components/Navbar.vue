@@ -40,7 +40,7 @@ export default {
           path: '/tables'
         },
         {
-          name: 'Club',
+          name: 'Clubs',
           path: '/clubs'
         },
         {
@@ -48,7 +48,7 @@ export default {
           path: '/players'
         },
         {
-          name: 'Manager',
+          name: 'Managers',
           path: '/managers'
         },
         {

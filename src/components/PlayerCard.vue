@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="card" @click="viewMore(info.id || 0)">
       <div class="card-image">
-        <img :src="(info.imgUrl) ? `/static/players/${id}.png` : '/static/Player-Photo-Missing.png'"/>
+        <img :src="imgUrl"/>
       </div>
       <div class="card-content">
         <div class="media">
@@ -12,7 +12,7 @@
               <strong>Position: </strong>
               <span class="is-pulled-right">{{ info.position || '' }}</span><br>
               <strong>Club: </strong>
-              <span class="is-pulled-right">{{ info.club_id || '' }}</span><br>
+              <span class="is-pulled-right">{{ info.club_name || '' }}</span><br>
               <strong>Nationality: </strong>
               <span class="is-pulled-right">{{ info.nationality || '' }}</span>
             </p>
@@ -31,6 +31,10 @@
         type: Object,
         required: true,
         default: () => []
+      },
+      imgUrl: {
+        type: String,
+        default: '/static/Player-Photo-Missing.png'
       }
     },
     methods: {

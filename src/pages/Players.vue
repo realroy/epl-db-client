@@ -26,6 +26,7 @@
 </template>
 
 <script>
+/* eslint-disable camelcase */
 import { fetch } from '../libs'
 import {
   FilterBar,
@@ -37,6 +38,7 @@ import { playerEnum } from '../enums'
 
 export default {
   async created () {
+    this.clubs = await fetch('clubs')
     this.players = await this.fetchPlayers()
   },
   components: {
@@ -49,6 +51,7 @@ export default {
     return {
       filterInfo: playerEnum.filters,
       players: [],
+      clubs: [],
       page: 1,
       filters: {},
       limit: 20
@@ -57,7 +60,18 @@ export default {
   methods: {
     async fetchPlayers () {
       const data = await fetch('players', this.filters, this.limit, this.page)
-      return data
+      return data.map(({ club_id, dob, height, id, weight, position, number, nationality, name }) => ({
+        club_id,
+        dob,
+        height,
+        id,
+        weight,
+        position,
+        number,
+        nationality,
+        name,
+        club_name: this.clubs.find(club => club.id === club_id).name
+      }))
     },
     async onUpdate (type = '', index = 0, value = '') {
       (type === 'club_name') ? this.filters['club_id'] = index : this.filters[type] = value
@@ -71,12 +85,12 @@ export default {
     },
     async onNextPage () {
       this.page++
-      const data = await fetch('players', this.filters, this.limit, this.page)
+      const data = await this.fetchPlayers('players', this.filters, this.limit, this.page)
       this.players = data
     },
     async onPrevPage () {
       this.page > 1 ? this.page-- : this.page
-      const data = await fetch('players', this.filters, this.limit, this.page)
+      const data = await this.fetchPlayers('players', this.filters, this.limit, this.page)
       this.players = data
     }
   }

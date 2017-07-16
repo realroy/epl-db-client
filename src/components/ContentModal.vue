@@ -51,7 +51,7 @@ export default {
       const result = Object.keys(this.$refs).reduce(
         (prev, key) => {
           (this.$refs[key][0].value) ? prev[key] = this.$refs[key][0].value : prev
-          prev[key] = (parseInt(prev[key])) ? parseInt(prev[key]) : prev[key]
+          // prev[key] = (parseInt(prev[key])) ? parseInt(prev[key]) : prev[key]
           return prev
         }
       , {})

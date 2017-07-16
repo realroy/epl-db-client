@@ -1,7 +1,10 @@
 <template>
   <div class="columns is-multiline is-mobile">
     <div class="column is-3-desktop " v-for="(player, index) in  players">
-      <player-card :info="player"></player-card>
+      <player-card
+        :info="player"
+        :imgUrl="`/static/players/${player.number} ${player.name}.png`">
+      </player-card>
     </div>
   </div>
 </template>

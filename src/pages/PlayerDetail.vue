@@ -1,6 +1,12 @@
 <template>
   <div>
-    <player-hero :number="player.number" :name="player.name" :clubId="player.clubId" :clubName="player.clubName" :position="player.position">
+    <player-hero
+      :number="player.number"
+      :name="player.name"
+      :clubId="player.club_id"
+      :picUrl="`/static/players/${player.number} ${player.name}.png`"
+      :clubName="player.club_name"
+      :position="player.position">
     </player-hero>
     <br>
     <div class="container">
@@ -8,19 +14,23 @@
         <div class="column">
           <custom-card :name="'Personal Detail'" :info="[
                 {name: 'Nationality', value: this.player.nationality},
-                {name: 'Age', value: 0},
                 {name: 'Date of birth', value: this.player.dob},
                 {name: 'Height', value: this.player.height},
                 {name: 'Weight', value: this.player.weight}]">
           </custom-card>
         </div>
         <div class="column is-three-quarters">
-          <custom-level :name="overview.name" :info="overview.info">
+          <custom-level
+            :name="overview.name"
+            :info="overview.info">
           </custom-level>
           <br>
           <div class="columns">
             <div class="column">
-              <custom-card :name="discipline.name" :info="discipline.info"></custom-card>
+              <custom-card 
+                :name="discipline.name"
+                :info="discipline.info">
+              </custom-card>
             </div>
           </div>
         </div>
@@ -57,9 +67,7 @@ export default {
         name: 'Overview',
         info: [
           { name: 'Goals', value: this.goal },
-          { name: 'Assists', value: this.assist },
-          { name: 'Win', value: 0 },
-          { name: 'Losses', value: 0 }
+          { name: 'Assists', value: this.assist }
         ]
       }
     },
